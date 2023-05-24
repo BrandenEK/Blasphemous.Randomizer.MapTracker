@@ -8,7 +8,7 @@ namespace RandoMap
     {
         public static void Postfix(NewMapMenuWidget __instance)
         {
-            Main.MapTracker.OpenMap(__instance);
+            Main.MapTracker.RefreshMap();
         }
     }
 }

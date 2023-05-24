@@ -16,11 +16,33 @@ namespace RandoMap
         private Transform marksHolder;
         private Sprite greenMark, redMark;
 
-        public void OpenMap(NewMapMenuWidget widget)
+        public bool DisplayLocationMarks { get; private set; }
+
+        protected override void Update()
         {
-            LogWarning("Opening map");
+            // Debug
+            if (UnityEngine.Input.GetKeyDown(KeyCode.P))
+            {
+                CellKey cell = Core.NewMapManager.GetPlayerCell();
+                LogWarning("Current cell position: " + new Vector2(cell.X, cell.Y));
+            }
+
+            // Toggle display status of location marks
+            if (UnityEngine.Input.GetKeyDown(KeyCode.F1))
+            {
+                DisplayLocationMarks = !DisplayLocationMarks;
+                RefreshMap();
+            }
+        }
+
+        public void RefreshMap()
+        {
+            // Only refresh map if paused
+            if (!Core.Logic.IsPaused) return;
+
+            LogWarning("Refreshing map locations!");
             if (marksHolder == null)
-                CreateMarksHolder(widget);
+                CreateMarksHolder();
             if (marksHolder != null)
                 marksHolder.SetAsLastSibling();
 
@@ -32,29 +54,23 @@ namespace RandoMap
             {
                 ItemLocation location = Main.Randomizer.data.itemLocations[mark.name];
                 string flag = location.LocationFlag == null ? "LOCATION_" + location.Id : location.LocationFlag.Split('~')[0];
+                bool shouldDisplayLocation = DisplayLocationMarks && !Core.Events.GetFlag(flag);
 
-                bool collected = Core.Events.GetFlag(flag);
-                mark.gameObject.SetActive(!collected);
-                if (!collected)
+                mark.gameObject.SetActive(shouldDisplayLocation);
+                if (shouldDisplayLocation)
                 {
                     // These needs to be better !! Cant get compoennet for each of them every time
                     mark.GetComponent<Image>().sprite = rng.Next(2) == 1 ? redMark : greenMark;
                 }
             }
         }
-        protected override void Update()
-        {
-            if (UnityEngine.Input.GetKeyDown(KeyCode.P))
-            {
-                CellKey cell = Core.NewMapManager.GetPlayerCell();
-                LogWarning("Current cell position: " + new Vector2(cell.X, cell.Y));
-            }
-        }
 
-        private void CreateMarksHolder(NewMapMenuWidget widget)
+        private void CreateMarksHolder()
         {
-            LogWarning("Creating marks holder");
+            Log("Creating marks holder");
 
+            NewMapMenuWidget widget = Object.FindObjectOfType<NewMapMenuWidget>();
+            if (widget == null) return;
             Transform rootRenderer = widget.transform.Find("Background/Map/MapMask/MapRoot/RootRenderer_0");
             if (rootRenderer == null) return;
 
