@@ -17,6 +17,13 @@ namespace RandoMap
         private Sprite greenMark, redMark;
 
         public bool DisplayLocationMarks { get; private set; }
+        //public bool ShowingMap { get; set; }
+
+        protected override void Initialize()
+        {
+            DisableFileLogging = true;
+            DisplayLocationMarks = true;
+        }
 
         protected override void Update()
         {
@@ -39,8 +46,8 @@ namespace RandoMap
         {
             // Only refresh map if paused
             if (!Core.Logic.IsPaused) return;
-
             LogWarning("Refreshing map locations!");
+
             if (marksHolder == null)
                 CreateMarksHolder();
             if (marksHolder != null)
@@ -94,6 +101,19 @@ namespace RandoMap
                 Main.MapTracker.Log($"Creating mark at " + rect.localPosition);
             }
         }
+
+        //private Transform m_MapRenderer;
+        //private Transform MapRenderer
+        //{
+        //    get
+        //    {
+        //        if (m_MapRenderer == null)
+        //        {
+        //            m_MapRenderer = Object.FindObjectOfType<NewMapMenuWidget>()?.transform.Find("Background/Map/MapMask/MapRoot/RootRenderer_0");
+        //        }
+        //        return m_MapRenderer;
+        //    }
+        //}
 
         private Dictionary<string, Vector2> mapLocations = new Dictionary<string, Vector2>()
         {
