@@ -213,7 +213,10 @@ namespace RandoMap
             // Set up starting room
             visibleRooms = new List<string>();
             List<DoorLocation> checkedDoors = new List<DoorLocation>();
-            Stack<DoorLocation> currentDoors = new Stack<DoorLocation>();
+            List<DoorLocation> unreachableDoors = new List<DoorLocation>();
+            List<DoorLocation> previousUnreachableDoors;
+            Stack<DoorLocation> currentDoors;
+
             DoorLocation startingDoor = allDoorLocations[Main.Randomizer.StartingDoor.Door];
             roomObjects["Initial"].AddRange(roomObjects[startingDoor.Room]); // Starting room is visible
             roomObjects["D02Z02S11"].AddRange(roomObjects["D01Z02S03"]); // Albero elevator room is also visible after graveyard elevator
@@ -223,47 +226,67 @@ namespace RandoMap
                 {
                     DoorLocation door = allDoorLocations[obj];
                     if (door.Direction != 5)
-                        currentDoors.Push(door); // Maybe instead check visibility flags
+                        unreachableDoors.Add(door); // Maybe instead check visibility flags
                 }
             }
             inventory.AddItem(startingDoor.Id);
             visibleRooms.Add(startingDoor.Room);
             visibleRooms.Add("Initial");
 
-            // While there are more visible doors, search them
-            while (currentDoors.Count > 0)
+            while (true) // While more doors were made reachable this cycle
             {
-                DoorLocation enterDoor = currentDoors.Pop();
-                if (checkedDoors.Contains(enterDoor)) continue;
+                // Remake doors list
+                currentDoors = new Stack<DoorLocation>(unreachableDoors);
+                previousUnreachableDoors = new List<DoorLocation>(unreachableDoors);
+                unreachableDoors.Clear();
 
-                if (enterDoor.Logic == null || Parser.EvaluateExpression(enterDoor.Logic, inventory))
+                while (currentDoors.Count > 0) // While there are more visible doors, search them
                 {
-                    DoorLocation exitDoor = Main.Randomizer.itemShuffler.GetTargetDoor(enterDoor.Id);
-                    if (exitDoor == null) exitDoor = allDoorLocations[enterDoor.OriginalDoor];
+                    DoorLocation enterDoor = currentDoors.Pop();
+                    if (checkedDoors.Contains(enterDoor)) continue;
 
-                    checkedDoors.Add(enterDoor);
-                    checkedDoors.Add(exitDoor);
-                    inventory.AddItem(enterDoor.Id);
-                    inventory.AddItem(exitDoor.Id);
-
-                    string newRoom = exitDoor.Room;
-                    foreach (string obj in roomObjects[newRoom])
+                    if (enterDoor.Logic == null || Parser.EvaluateExpression(enterDoor.Logic, inventory))
                     {
-                        if (obj[0] == 'D')
+                        DoorLocation exitDoor = Main.Randomizer.itemShuffler.GetTargetDoor(enterDoor.Id);
+                        if (exitDoor == null) exitDoor = allDoorLocations[enterDoor.OriginalDoor];
+
+                        checkedDoors.Add(enterDoor);
+                        checkedDoors.Add(exitDoor);
+                        inventory.AddItem(enterDoor.Id);
+                        inventory.AddItem(exitDoor.Id);
+                        unreachableDoors.Remove(enterDoor);
+                        unreachableDoors.Remove(exitDoor);
+
+                        string newRoom = exitDoor.Room;
+                        foreach (string obj in roomObjects[newRoom])
                         {
-                            // If this door hasn't already been processed, make it visible
-                            DoorLocation newDoor = allDoorLocations[obj];
-                            if (newDoor.ShouldBeMadeVisible(settings, inventory))
+                            if (obj[0] == 'D')
                             {
-                                currentDoors.Push(newDoor);
+                                // If this door hasn't already been processed, make it visible
+                                DoorLocation newDoor = allDoorLocations[obj];
+                                if (newDoor.ShouldBeMadeVisible(settings, inventory))
+                                {
+                                    currentDoors.Push(newDoor);
+                                }
                             }
                         }
+                        if (!visibleRooms.Contains(newRoom))
+                            visibleRooms.Add(newRoom);
+                        if (newRoom == "D02Z02S11" && !visibleRooms.Contains("D01Z02S03"))
+                            visibleRooms.Add("D01Z02S03");
                     }
-                    if (!visibleRooms.Contains(newRoom))
-                        visibleRooms.Add(newRoom);
-                    if (newRoom == "D02Z02S11" && !visibleRooms.Contains("D01Z02S03"))
-                        visibleRooms.Add("D01Z02S03");
+                    else
+                    {
+                        // If door is unreachable, check it again on the next cycle
+                        if (!unreachableDoors.Contains(enterDoor))
+                            unreachableDoors.Add(enterDoor);
+                    }
                 }
+
+                // If the exact same doors were in the unreachabled list last time, then no more are reachable
+                // Otherwise, recheck all of the unreachable doors in case a door opened it up
+                if (unreachableDoors.IsReverseOf(previousUnreachableDoors))
+                    break;
             }
 
             return inventory;

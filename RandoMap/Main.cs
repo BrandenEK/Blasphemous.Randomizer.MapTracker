@@ -1,5 +1,6 @@
 ﻿using BepInEx;
 using BlasphemousRandomizer;
+using System.Collections.Generic;
 
 namespace RandoMap
 {
@@ -20,6 +21,23 @@ namespace RandoMap
         {
             MapTracker = new MapTracker(MOD_ID, MOD_NAME, MOD_VERSION);
             Randomizer = BlasphemousRandomizer.Main.Randomizer;
+        }
+    }
+
+    public static class ListExtensions
+    {
+        public static bool IsReverseOf<T>(this List<T> mainList, List<T> otherList)
+        {
+            if (mainList.Count != otherList.Count)
+                return false;
+
+            for (int i = 0; i < mainList.Count; i++)
+            {
+                if (!mainList[i].Equals(otherList[mainList.Count - 1 - i]))
+                    return false;
+            }
+
+            return true;
         }
     }
 }
