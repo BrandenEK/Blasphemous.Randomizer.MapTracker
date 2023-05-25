@@ -57,28 +57,36 @@ namespace RandoMap
             if (marksHolder != null)
                 marksHolder.SetAsLastSibling();
 
-            // Get current inventory based on items
-            BlasphemousInventory inventory = CreateCurrentInventory(out List<string> visibleRooms); // Only calculate if displaying marks!!
-
-            // Check if each one has been collected or is in logic
-            foreach (Transform mark in marksHolder)
+            if (DisplayLocationMarks) // Determine how marks should be shown based on logic
             {
-                if (!Main.MapTracker.DisplayLocationMarks)
+                // Get current inventory based on items
+                BlasphemousInventory inventory = CreateCurrentInventory(out List<string> visibleRooms);
+
+                // Check if each one has been collected or is in logic
+                foreach (Transform mark in marksHolder)
                 {
-                    mark.gameObject.SetActive(false);
-                    continue;
+                    Vector2 cellPosition = new Vector2(mark.localPosition.x / 16, mark.localPosition.y / 16);
+                    if (!mapLocations.TryGetValue(cellPosition, out MapLocation mapLocation))
+                    {
+                        LogError(cellPosition + " is not a cell that contains locations!");
+                        continue;
+                    }
+                    MapLocation.CollectionStatus collectionStatus = mapLocation.GetCurrentStatus(inventory, visibleRooms);
+
+                    mark.gameObject.SetActive(collectionStatus != MapLocation.CollectionStatus.AllCollected);
+                    if (collectionStatus == MapLocation.CollectionStatus.NoneReachable)
+                        mapLocation.Image.sprite = redMark;
+                    else if (collectionStatus == MapLocation.CollectionStatus.SomeReachable)
+                        mapLocation.Image.sprite = greenMark;
+                    else if (collectionStatus == MapLocation.CollectionStatus.AllReachable)
+                        mapLocation.Image.sprite = greenMark;
                 }
 
-                MapLocation mapLocation = mapLocations[new Vector2(mark.localPosition.x / 16, mark.localPosition.y / 16)];
-                MapLocation.CollectionStatus collectionStatus = mapLocation.GetCurrentStatus(inventory, visibleRooms);
-
-                mark.gameObject.SetActive(collectionStatus != MapLocation.CollectionStatus.AllCollected);
-                if (collectionStatus == MapLocation.CollectionStatus.NoneReachable)
-                    mapLocation.Image.sprite = redMark;
-                else if (collectionStatus == MapLocation.CollectionStatus.SomeReachable)
-                    mapLocation.Image.sprite = greenMark;
-                else if (collectionStatus == MapLocation.CollectionStatus.AllReachable)
-                    mapLocation.Image.sprite = greenMark;
+            }
+            else // Hide all marks
+            {
+                foreach (Transform mark in marksHolder)
+                    mark.gameObject.SetActive(false);
             }
         }
 
@@ -348,8 +356,90 @@ namespace RandoMap
             // Petrous
             { new Vector2(23, 40), new MapLocation("QI101") },
             // Olive Trees
-            { new Vector2(), new MapLocation("") },
-            { new Vector2(), new MapLocation("") },
+            { new Vector2(43, 44), new MapLocation("CO11") },
+            { new Vector2(42, 45), new MapLocation("QI59", "RB10") },
+            { new Vector2(41, 47), new MapLocation("RESCUED_CHERUB_23") },
+            { new Vector2(39, 45), new MapLocation("QI20") },
+            { new Vector2(38, 45), new MapLocation("QI68") },
+            { new Vector2(34, 47), new MapLocation("QI07") },
+            { new Vector2(39, 44), new MapLocation("RESCUED_CHERUB_27") },
+            { new Vector2(42, 44), new MapLocation("CO19") },
+            { new Vector2(38, 43), new MapLocation("PR04") },
+            { new Vector2(43, 47), new MapLocation("HE05") },
+            // Graveyard
+            { new Vector2(35, 53), new MapLocation("RESCUED_CHERUB_24") },
+            { new Vector2(36, 53), new MapLocation("QI46") },
+            { new Vector2(36, 54), new MapLocation("CO29") },
+            { new Vector2(36, 56), new MapLocation("QI08") },
+            { new Vector2(34, 54), new MapLocation("RESCUED_CHERUB_25") },
+            { new Vector2(34, 55), new MapLocation("RB32") },
+            { new Vector2(34, 56), new MapLocation("CO01") },
+            { new Vector2(35, 58), new MapLocation("RB15") },
+            { new Vector2(31, 49), new MapLocation("RB38") },
+            { new Vector2(35, 48), new MapLocation("CO42") },
+            { new Vector2(35, 49), new MapLocation("RESCUED_CHERUB_31") },
+            { new Vector2(36, 57), new MapLocation("Oil[D02Z02S10]") },
+            { new Vector2(32, 50), new MapLocation("QI53") },
+            { new Vector2(32, 48), new MapLocation("RESCUED_CHERUB_26") },
+            { new Vector2(33, 50), new MapLocation("Lady[D02Z02S12]") },
+            { new Vector2(33, 58), new MapLocation("HE11") },
+            { new Vector2(37, 56), new MapLocation("RB106", "Amanecida[D02Z02S14]") },
+            { new Vector2(33, 49), new MapLocation("QI11", "RB37", "RB02") },
+            // Convent
+            { new Vector2(30, 62), new MapLocation("CO05") },
+            { new Vector2(27, 62), new MapLocation("RB08") },
+            { new Vector2(27, 60), new MapLocation("CO15") },
+            { new Vector2(26, 58), new MapLocation("HE03") },
+            { new Vector2(33, 63), new MapLocation("Sword[D02Z03S13]") },
+            { new Vector2(31, 64), new MapLocation("Lady[D02Z03S15]") },
+            { new Vector2(23, 59), new MapLocation("RB24") },
+            { new Vector2(31, 65), new MapLocation("QI61") },
+            { new Vector2(29, 63), new MapLocation("BS03") },
+            { new Vector2(31, 63), new MapLocation("QI40", "QI57") },
+            { new Vector2(22, 63), new MapLocation("RB107") },
+            // Mountains
+            { new Vector2(32, 37), new MapLocation("CO13") },
+            { new Vector2(21, 36), new MapLocation("RB22") },
+            { new Vector2(19, 36), new MapLocation("QI47", "Amanecida[D03Z01S03]") },
+            { new Vector2(18, 36), new MapLocation("RESCUED_CHERUB_16") },
+            { new Vector2(15, 36), new MapLocation("QI63") },
+            { new Vector2(23, 37), new MapLocation("RB13", "QI14") },
+            // Jondo
+            { new Vector2(21, 34), new MapLocation("CO08") },
+            { new Vector2(21, 35), new MapLocation("PR10") },
+            { new Vector2(21, 29), new MapLocation("CO33") },
+            { new Vector2(22, 32), new MapLocation("RESCUED_CHERUB_18") },
+            { new Vector2(21, 28), new MapLocation("QI19") },
+            { new Vector2(18, 28), new MapLocation("CO07") },
+            { new Vector2(17, 29), new MapLocation("QI41") },
+            { new Vector2(16, 35), new MapLocation("RESCUED_CHERUB_17") },
+            { new Vector2(26, 32), new MapLocation("HE06") },
+            { new Vector2(25, 32), new MapLocation("RESCUED_CHERUB_37") },
+            { new Vector2(14, 33), new MapLocation("QI52") },
+            { new Vector2(15, 34), new MapLocation("RB28") },
+            { new Vector2(27, 32), new MapLocation("QI103") },
+            // Grievance
+            { new Vector2(21, 22), new MapLocation("QI44") },
+            { new Vector2(25, 23), new MapLocation("CO12") },
+            { new Vector2(25, 26), new MapLocation("RE07", "RESCUED_CHERUB_19") },
+            { new Vector2(29, 22), new MapLocation("QI10", "RESCUED_CHERUB_21") },
+            { new Vector2(25, 17), new MapLocation("RESCUED_CHERUB_20") },
+            { new Vector2(22, 16), new MapLocation("QI13", "RB06") },
+            { new Vector2(24, 19), new MapLocation("Oil[D03Z03S13]") },
+            { new Vector2(29, 19), new MapLocation("BS04") },
+            { new Vector2(31, 19), new MapLocation("QI39") },
+            // Patio
+            //{ new Vector2(), new MapLocation("") },
+            //{ new Vector2(), new MapLocation("") },
+            //{ new Vector2(), new MapLocation("") },
+            //{ new Vector2(), new MapLocation("") },
+            //{ new Vector2(), new MapLocation("") },
+            //{ new Vector2(), new MapLocation("") },
+            //{ new Vector2(), new MapLocation("") },
+            //{ new Vector2(), new MapLocation("") },
+            //{ new Vector2(), new MapLocation("") },
+            //{ new Vector2(), new MapLocation("") },
+            //{ new Vector2(), new MapLocation("") },
 
             // { new Vector2(), new MapLocation("") },
         };
