@@ -36,6 +36,9 @@
     <Reference Include="BlasphemousRandomizer">
       <HintPath>..\lib\BlasphemousRandomizer.dll</HintPath>
     </Reference>
+    <Reference Include="LogicParser">
+      <HintPath>..\lib\LogicParser.dll</HintPath>
+    </Reference>
     <Reference Include="ModdingAPI">
       <HintPath>..\lib\ModdingAPI.dll</HintPath>
     </Reference>

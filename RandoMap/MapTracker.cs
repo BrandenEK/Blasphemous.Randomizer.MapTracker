@@ -1,8 +1,12 @@
 ﻿using ModdingAPI;
+using BlasphemousRandomizer;
 using BlasphemousRandomizer.ItemRando;
+using BlasphemousRandomizer.DoorRando;
+using Framework.Inventory;
 using Framework.Managers;
 using Framework.Map;
 using Gameplay.UI.Others.MenuLogic;
+using LogicParser;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -53,6 +57,9 @@ namespace RandoMap
             if (marksHolder != null)
                 marksHolder.SetAsLastSibling();
 
+            // Get current inventory based on items
+            BlasphemousInventory inventory = CreateCurrentInventory(out List<string> visibleRooms); // Only calculate if displaying marks!!
+
             // Check if each one has been collected or is in logic
             foreach (Transform mark in marksHolder)
             {
@@ -63,7 +70,7 @@ namespace RandoMap
                 }
 
                 MapLocation mapLocation = mapLocations[new Vector2(mark.localPosition.x / 16, mark.localPosition.y / 16)];
-                MapLocation.CollectionStatus collectionStatus = mapLocation.CurrentStatus;
+                MapLocation.CollectionStatus collectionStatus = mapLocation.GetCurrentStatus(inventory, visibleRooms);
 
                 mark.gameObject.SetActive(collectionStatus != MapLocation.CollectionStatus.AllCollected);
                 if (collectionStatus == MapLocation.CollectionStatus.NoneReachable)
@@ -103,6 +110,155 @@ namespace RandoMap
                 mapLocation.Value.Image = rect.gameObject.AddComponent<Image>();
                 Main.MapTracker.Log($"Creating mark at " + rect.localPosition);
             }
+        }
+
+        private BlasphemousInventory CreateCurrentInventory(out List<string> visibleRooms)
+        {
+            Config settings = Main.Randomizer.GameSettings;
+            BlasphemousInventory inventory = new BlasphemousInventory();
+            inventory.SetConfigSettings(settings);
+            
+            // Add all obtained items to inventory
+
+            foreach (Item item in Main.Randomizer.data.items.Values)
+            {
+                switch (item.type)
+                {
+                    case 0: // Beads
+                    case 1: // Prayers
+                    case 2: // Relics
+                    case 3: // Hearts
+                    case 4: // Bones
+                    case 5: // Quest items
+                        if (item is ProgressiveItem progressiveItem)
+                        {
+                            foreach (string subItemId in progressiveItem.items)
+                            {
+                                if (Core.Events.GetFlag("ITEM_" + subItemId))
+                                    inventory.AddItem(item.id);
+                            }
+                        }
+                        else
+                        {
+                            if (Core.Events.GetFlag("ITEM_" + item.id))
+                                inventory.AddItem(item.id);
+                        }
+                        break;
+                    case 6: // Cherubs
+                        int cherubs = CherubCaptorPersistentObject.CountRescuedCherubs();
+                        for (int i = 0; i < cherubs; i++)
+                            inventory.AddItem(item.id);
+                        break;
+                    case 7: // Life
+                    case 8: // Fervour
+                    case 9: // Strength
+                        int upgrades;
+                        if (item.type == 7)
+                            upgrades = Core.Logic.Penitent.Stats.Life.GetUpgrades();
+                        else if (item.type == 8)
+                            upgrades = Core.Logic.Penitent.Stats.Fervour.GetUpgrades();
+                        else
+                            upgrades = Core.Logic.Penitent.Stats.Strength.GetUpgrades();
+                        for (int i = 0; i < upgrades; i++)
+                            inventory.AddItem(item.id);
+                        break;
+                    case 10: // Tears
+                        break;
+                    case 11: // Sword skills
+                        ProgressiveItem skillItem = item as ProgressiveItem;
+                        foreach (string skillId in skillItem.items)
+                        {
+                            if (Core.Events.GetFlag("ITEM_" + skillId))
+                                inventory.AddItem(item.id);
+                        }
+                        break;
+                    case 12: // Special items
+                        if (Core.Events.GetFlag("ITEM_" + item.id))
+                            inventory.AddItem(item.id);
+                        break;
+                }
+            }
+            if (!settings.ShuffleDash) inventory.AddItem("Slide");
+            if (!settings.ShuffleWallClimb) inventory.AddItem("WallClimb");
+
+            // Add all reachable doors to inventory
+
+            // Sort all item locations & doors into rooms
+            Dictionary<string, ItemLocation> allItemLocations = Main.Randomizer.data.itemLocations;
+            Dictionary<string, DoorLocation> allDoorLocations = Main.Randomizer.data.doorLocations;
+            Dictionary<string, List<string>> roomObjects = new Dictionary<string, List<string>>();
+            foreach (DoorLocation door in allDoorLocations.Values)
+            {
+                string scene = door.Room;
+                if (!roomObjects.ContainsKey(scene))
+                    roomObjects.Add(scene, new List<string>());
+                roomObjects[scene].Add(door.Id);
+            }
+            foreach (ItemLocation itemLoc in allItemLocations.Values)
+            {
+                string scene = itemLoc.Room;
+                if (!roomObjects.ContainsKey(scene))
+                    roomObjects.Add(scene, new List<string>());
+                roomObjects[scene].Add(itemLoc.Id);
+            }
+
+            // Set up starting room
+            visibleRooms = new List<string>();
+            List<DoorLocation> checkedDoors = new List<DoorLocation>();
+            Stack<DoorLocation> currentDoors = new Stack<DoorLocation>();
+            DoorLocation startingDoor = allDoorLocations[Main.Randomizer.StartingDoor.Door];
+            roomObjects["Initial"].AddRange(roomObjects[startingDoor.Room]); // Starting room is visible
+            roomObjects["D02Z02S11"].AddRange(roomObjects["D01Z02S03"]); // Albero elevator room is also visible after graveyard elevator
+            foreach (string obj in roomObjects["Initial"])
+            {
+                if (obj[0] == 'D')
+                {
+                    DoorLocation door = allDoorLocations[obj];
+                    if (door.Direction != 5)
+                        currentDoors.Push(door); // Maybe instead check visibility flags
+                }
+            }
+            inventory.AddItem(startingDoor.Id);
+            visibleRooms.Add(startingDoor.Room);
+            visibleRooms.Add("Initial");
+
+            // While there are more visible doors, search them
+            while (currentDoors.Count > 0)
+            {
+                DoorLocation enterDoor = currentDoors.Pop();
+                if (checkedDoors.Contains(enterDoor)) continue;
+
+                if (enterDoor.Logic == null || Parser.EvaluateExpression(enterDoor.Logic, inventory))
+                {
+                    DoorLocation exitDoor = Main.Randomizer.itemShuffler.GetTargetDoor(enterDoor.Id);
+                    if (exitDoor == null) exitDoor = allDoorLocations[enterDoor.OriginalDoor];
+
+                    checkedDoors.Add(enterDoor);
+                    checkedDoors.Add(exitDoor);
+                    inventory.AddItem(enterDoor.Id);
+                    inventory.AddItem(exitDoor.Id);
+
+                    string newRoom = exitDoor.Room;
+                    foreach (string obj in roomObjects[newRoom])
+                    {
+                        if (obj[0] == 'D')
+                        {
+                            // If this door hasn't already been processed, make it visible
+                            DoorLocation newDoor = allDoorLocations[obj];
+                            if (newDoor.ShouldBeMadeVisible(settings, inventory))
+                            {
+                                currentDoors.Push(newDoor);
+                            }
+                        }
+                    }
+                    if (!visibleRooms.Contains(newRoom))
+                        visibleRooms.Add(newRoom);
+                    if (newRoom == "D02Z02S11" && !visibleRooms.Contains("D01Z02S03"))
+                        visibleRooms.Add("D01Z02S03");
+                }
+            }
+
+            return inventory;
         }
 
         //private Transform m_MapRenderer;
@@ -190,7 +346,8 @@ namespace RandoMap
             { new Vector2(44, 33), new MapLocation("CO41") },
             { new Vector2(46, 36), new MapLocation("QI45") },
             // Petrous
-            { new Vector2(), new MapLocation("") },
+            { new Vector2(23, 40), new MapLocation("QI101") },
+            // Olive Trees
             { new Vector2(), new MapLocation("") },
             { new Vector2(), new MapLocation("") },
 

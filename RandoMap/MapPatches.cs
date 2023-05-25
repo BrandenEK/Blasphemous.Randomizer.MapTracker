@@ -1,6 +1,7 @@
 ﻿using HarmonyLib;
 using Framework.Managers;
 using Gameplay.UI.Others.MenuLogic;
+using BlasphemousRandomizer.ItemRando;
 
 namespace RandoMap
 {
@@ -25,4 +26,13 @@ namespace RandoMap
     //            Main.MapTracker.RefreshMap();
     //    }
     //}
+
+    [HarmonyPatch(typeof(BlasphemousInventory), "AddItem")]
+    public class temp
+    {
+        public static void Postfix(string itemId)
+        {
+            Main.MapTracker.LogWarning("Adding item: " + itemId);
+        }
+    }
 }
