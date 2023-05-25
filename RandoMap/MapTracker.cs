@@ -315,6 +315,7 @@ namespace RandoMap
             { new Vector2(48, 35), new MapLocation("RB17") },
             { new Vector2(50, 32), new MapLocation("QI48") },
             { new Vector2(50, 35), new MapLocation("RESCUED_CHERUB_09") },
+            { new Vector2(50, 39), new MapLocation("QI32") },
             { new Vector2(51, 31), new MapLocation("BS01") },
             { new Vector2(51, 35), new MapLocation("CO03") },
             { new Vector2(51, 38), new MapLocation("CO30") },
@@ -356,7 +357,7 @@ namespace RandoMap
             { new Vector2(43, 44), new MapLocation("CO11") },
             { new Vector2(43, 47), new MapLocation("HE05") },
             // Graveyard
-            { new Vector2(31, 49), new MapLocation("RB38") },
+            { new Vector2(31, 49), new MapLocation("RB38", "QI33") },
             { new Vector2(32, 48), new MapLocation("RESCUED_CHERUB_26") },
             { new Vector2(32, 50), new MapLocation("QI53") },
             { new Vector2(33, 49), new MapLocation("QI11", "RB37", "RB02") },
@@ -378,6 +379,7 @@ namespace RandoMap
             { new Vector2(22, 63), new MapLocation("RB107") },
             { new Vector2(23, 59), new MapLocation("RB24") },
             { new Vector2(26, 58), new MapLocation("HE03") },
+            { new Vector2(26, 62), new MapLocation("RB18") },
             { new Vector2(27, 60), new MapLocation("CO15") },
             { new Vector2(27, 62), new MapLocation("RB08") },
             { new Vector2(29, 63), new MapLocation("BS03") },
@@ -410,6 +412,7 @@ namespace RandoMap
             // Grievance
             { new Vector2(21, 22), new MapLocation("QI44") },
             { new Vector2(22, 16), new MapLocation("QI13", "RB06") },
+            { new Vector2(22, 25), new MapLocation("QI34") },
             { new Vector2(24, 19), new MapLocation("Oil[D03Z03S13]") },
             { new Vector2(25, 17), new MapLocation("RESCUED_CHERUB_20") },
             { new Vector2(25, 23), new MapLocation("CO12") },
@@ -430,6 +433,7 @@ namespace RandoMap
             // Mother of Mothers
             { new Vector2(67, 43), new MapLocation("RE402", "RESCUED_CHERUB_30") },
             { new Vector2(67, 44), new MapLocation("CO17") },
+            { new Vector2(68, 44), new MapLocation("QI79") },
             { new Vector2(68, 46), new MapLocation("QI60") },
             { new Vector2(70, 46), new MapLocation("BS05") },
             { new Vector2(73, 44), new MapLocation("CO20") },
@@ -457,11 +461,13 @@ namespace RandoMap
             { new Vector2(68, 37), new MapLocation("QI50") },
             { new Vector2(68, 41), new MapLocation("CO22") },
             { new Vector2(69, 39), new MapLocation("CO18") },
+            { new Vector2(69, 41), new MapLocation("QI80") },
             { new Vector2(70, 40), new MapLocation("RESCUED_CHERUB_01") },
             { new Vector2(71, 39), new MapLocation("Sword[D05Z01S13]") },
             { new Vector2(71, 40), new MapLocation("RB301") },
             { new Vector2(72, 34), new MapLocation("RESCUED_CHERUB_32") },
             { new Vector2(73, 39), new MapLocation("QI62") },
+            { new Vector2(74, 39), new MapLocation("RB19") },
             // Canvases
             { new Vector2(57, 31), new MapLocation("QI104") },
             { new Vector2(60, 30), new MapLocation("RB12", "QI49", "QI71") },
@@ -491,6 +497,7 @@ namespace RandoMap
             { new Vector2(55, 47), new MapLocation("LaudesBossTrigger[30000]") },
             { new Vector2(56, 44), new MapLocation("QI105") },
             // Wall
+            { new Vector2(55, 51), new MapLocation("QI81") },
             { new Vector2(57, 50), new MapLocation("BS14") },
             { new Vector2(57, 51), new MapLocation("QI72") },
             { new Vector2(58, 49), new MapLocation("Oil[D09Z01S12]") },
@@ -514,7 +521,9 @@ namespace RandoMap
             { new Vector2(05, 44), new MapLocation("PR203") },
             { new Vector2(07, 43), new MapLocation("RB204") },
             { new Vector2(11, 37), new MapLocation("Sword[D17Z01S08]") },
+            { new Vector2(11, 40), new MapLocation("QI35") },
             { new Vector2(12, 40), new MapLocation("RE401", "CO25") },
+            { new Vector2(13, 40), new MapLocation("RB25") },
             { new Vector2(15, 41), new MapLocation("BS13") },
             { new Vector2(16, 41), new MapLocation("RE01") },
             // Echoes
@@ -527,26 +536,8 @@ namespace RandoMap
             // Resting Place
             { new Vector2(41, 30), new MapLocation("QI203") },
 
-            // Candles
-            //{ new Vector2(13, 40), new MapLocation("RB25") },
-            { new Vector2(), new MapLocation("") },
-            { new Vector2(), new MapLocation("") },
-            { new Vector2(), new MapLocation("") },
-
-            // Guilt Arenas
-            //{ new Vector2(11, 40), new MapLocation("QI35") },
-            { new Vector2(), new MapLocation("") },
-            { new Vector2(), new MapLocation("") },
-            { new Vector2(), new MapLocation("") },
-            { new Vector2(), new MapLocation("") },
-            { new Vector2(), new MapLocation("") },
-            { new Vector2(), new MapLocation("") },
-
-            { new Vector2(), new MapLocation("") },
-            { new Vector2(), new MapLocation("") },
-            { new Vector2(), new MapLocation("") },
-
-            // { new Vector2(), new MapLocation("") },
+            // Sword Skills
+            //{ new Vector2(), new MapLocation("") },
         };
     }
 }

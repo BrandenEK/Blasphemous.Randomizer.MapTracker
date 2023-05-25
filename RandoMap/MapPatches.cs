@@ -32,7 +32,7 @@ namespace RandoMap
     {
         public static void Postfix(string itemId)
         {
-            Main.MapTracker.LogWarning("Adding item: " + itemId);
+            //Main.MapTracker.LogWarning("Adding item: " + itemId);
         }
     }
 }
