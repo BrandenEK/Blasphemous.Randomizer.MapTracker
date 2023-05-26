@@ -10,8 +10,8 @@ namespace RandoMap
     {
         public Image Image { get; set; }
 
-        string singleLocation = null;
-        string[] multipleLocations = null;
+        readonly string singleLocation = null;
+        readonly string[] multipleLocations = null;
 
         public MapLocation(string locationId)
         {
@@ -30,43 +30,39 @@ namespace RandoMap
                 ItemLocation itemLocation = Main.Randomizer.data.itemLocations[singleLocation];
 
                 // Check if the location has already been collected
-                string flag = itemLocation.LocationFlag == null ? "LOCATION_" + itemLocation.Id : itemLocation.LocationFlag.Split('~')[0];
-                if (Core.Events.GetFlag(flag))
+                if (Core.Events.GetFlag(itemLocation.GetSpecialFlag()))
                     return CollectionStatus.AllCollected;
 
                 // Check if the location is in logic
-                bool isReachable = visibleRooms.Contains(itemLocation.GetSpecialRoom()) && (itemLocation.Logic == null || Parser.EvaluateExpression(itemLocation.GetSpecialLogic(), inventory));
-                return (isReachable) ? CollectionStatus.AllReachable : CollectionStatus.NoneReachable;
+                return itemLocation.IsReachable(visibleRooms, inventory) ? CollectionStatus.AllReachable : CollectionStatus.NoneReachable;
             }
             else if (multipleLocations != null) // Multiple locations for this cell
             {
-                bool oneIsReachable = false, oneIsNotReachable = false;
+                bool atLeastOneReachable = false, atLeastOneNotReachable = false;
 
                 foreach (string locationId in multipleLocations)
                 {
                     ItemLocation itemLocation = Main.Randomizer.data.itemLocations[locationId];
 
                     // Check if the location has already been collected
-                    string flag = itemLocation.LocationFlag == null ? "LOCATION_" + itemLocation.Id : itemLocation.LocationFlag.Split('~')[0];
-                    if (Core.Events.GetFlag(flag))
+                    if (Core.Events.GetFlag(itemLocation.GetSpecialFlag()))
                         continue;
 
                     // Check if the location is in logic
-                    bool isReachable = visibleRooms.Contains(itemLocation.GetSpecialRoom()) && (itemLocation.Logic == null || Parser.EvaluateExpression(itemLocation.GetSpecialLogic(), inventory));
-                    if (isReachable)
-                        oneIsReachable = true;
+                    if (itemLocation.IsReachable(visibleRooms, inventory))
+                        atLeastOneReachable = true;
                     else
-                        oneIsNotReachable = true;
+                        atLeastOneNotReachable = true;
                 }
 
                 // Based on all locations in the cell
-                if (!oneIsReachable && !oneIsNotReachable) return CollectionStatus.AllCollected;
-                else if (oneIsReachable && !oneIsNotReachable) return CollectionStatus.AllReachable;
-                else if (!oneIsReachable && oneIsNotReachable) return CollectionStatus.NoneReachable;
+                if (!atLeastOneReachable && !atLeastOneNotReachable) return CollectionStatus.AllCollected;
+                else if (atLeastOneReachable && !atLeastOneNotReachable) return CollectionStatus.AllReachable;
+                else if (!atLeastOneReachable && atLeastOneNotReachable) return CollectionStatus.NoneReachable;
                 else return CollectionStatus.SomeReachable;
             }
 
-            return CollectionStatus.NoneReachable;
+            throw new System.Exception("Map cell locations not set up correctly!");
         }
 
         public enum CollectionStatus
@@ -80,6 +76,19 @@ namespace RandoMap
 
     public static class LogicExtensions
     {
+        public static bool IsReachable(this ItemLocation location, List<string> visibleRooms, BlasphemousInventory inventory)
+        {
+            return visibleRooms.Contains(location.GetSpecialRoom()) && (location.Logic == null || Parser.EvaluateExpression(location.GetSpecialLogic(), inventory));
+        }
+
+        public static string GetSpecialFlag(this ItemLocation location)
+        {
+            if (location.LocationFlag == null)
+                return "LOCATION_" + location.Id;
+            else
+                return location.LocationFlag.Split('~')[0];
+        }
+
         public static string GetSpecialLogic(this ItemLocation location)
         {
             switch (location.Id)

@@ -1,10 +1,11 @@
 ﻿using HarmonyLib;
-using Framework.Managers;
+using Framework.Map;
 using Gameplay.UI.Others.MenuLogic;
-using BlasphemousRandomizer.ItemRando;
+using System.Collections.Generic;
 
 namespace RandoMap
 {
+    // Refresh map when opened
     [HarmonyPatch(typeof(NewMapMenuWidget), "OnShow")]
     public class MapMenuWidgetOpen_Patch
     {
@@ -14,25 +15,16 @@ namespace RandoMap
         }
     }
 
-    //[HarmonyPatch(typeof(NewMapMenuWidget), "UpdateCurrentRenderer")]
-    //public class MapMenuWidgetUpdate_Patch
-    //{
-    //    public static void Postfix(bool ___mapEnabled, int ___CurrentRendererIndex)
-    //    {
-    //        bool mapVisible = ___mapEnabled && ___CurrentRendererIndex == 0;
-
-    //        Main.MapTracker.ShowingMap = mapVisible;
-    //        if (mapVisible)
-    //            Main.MapTracker.RefreshMap();
-    //    }
-    //}
-
-    [HarmonyPatch(typeof(BlasphemousInventory), "AddItem")]
-    public class temp
+    // Change speed of map scrolling
+    [HarmonyPatch(typeof(NewMapMenuWidget), "Initialize")]
+    public class MapMenuWidgetInit_Patch
     {
-        public static void Postfix(string itemId)
+        public static void Postfix(List<MapRenderer> ___MapRenderers)
         {
-            //Main.MapTracker.LogWarning("Adding item: " + itemId);
+            foreach (MapRenderer renderer in ___MapRenderers)
+            {
+                renderer.Config.MovementSpeed = 400f;
+            }
         }
     }
 }

@@ -2,7 +2,6 @@
 using BlasphemousRandomizer;
 using BlasphemousRandomizer.ItemRando;
 using BlasphemousRandomizer.DoorRando;
-using Framework.Inventory;
 using Framework.Managers;
 using Framework.Map;
 using Gameplay.UI.Others.MenuLogic;
@@ -18,7 +17,7 @@ namespace RandoMap
         public MapTracker(string modId, string modName, string modVersion) : base(modId, modName, modVersion) { }
 
         private Transform marksHolder;
-        private Sprite greenMark, redMark;
+        private Sprite mapMarker;
 
         public bool DisplayLocationMarks { get; private set; }
         //public bool ShowingMap { get; set; }
@@ -27,6 +26,9 @@ namespace RandoMap
         {
             DisableFileLogging = true;
             DisplayLocationMarks = true;
+
+            if (FileUtil.loadDataImages("marker.png", 10, 10, 10, 0, true, out Sprite[] images))
+                mapMarker = images[0];
         }
 
         protected override void Update()
@@ -75,11 +77,11 @@ namespace RandoMap
 
                     mark.gameObject.SetActive(collectionStatus != MapLocation.CollectionStatus.AllCollected);
                     if (collectionStatus == MapLocation.CollectionStatus.NoneReachable)
-                        mapLocation.Image.sprite = redMark;
+                        mapLocation.Image.color = Color.red;
                     else if (collectionStatus == MapLocation.CollectionStatus.SomeReachable)
-                        mapLocation.Image.sprite = greenMark;
+                        mapLocation.Image.color = Color.yellow;
                     else if (collectionStatus == MapLocation.CollectionStatus.AllReachable)
-                        mapLocation.Image.sprite = greenMark;
+                        mapLocation.Image.color = Color.green;
                 }
 
             }
@@ -93,19 +95,11 @@ namespace RandoMap
         private void CreateMarksHolder()
         {
             Log("Creating marks holder");
-
-            NewMapMenuWidget widget = Object.FindObjectOfType<NewMapMenuWidget>();
-            if (widget == null) return;
-            Transform rootRenderer = widget.transform.Find("Background/Map/MapMask/MapRoot/RootRenderer_0");
+            Transform rootRenderer = Object.FindObjectOfType<NewMapMenuWidget>()?.transform.Find("Background/Map/MapMask/MapRoot/RootRenderer_0");
             if (rootRenderer == null) return;
 
             marksHolder = new GameObject("MarksHolder", typeof(RectTransform)).transform as RectTransform;
             marksHolder.SetParent(rootRenderer, false);
-
-            MapRendererConfig cfg = widget.RendererConfigs[0];
-            greenMark = cfg.Marks[MapData.MarkType.Green];
-            redMark = cfg.Marks[MapData.MarkType.Red];
-            Vector2 markSize = new Vector2(greenMark.rect.width, greenMark.rect.height);
 
             foreach (KeyValuePair<Vector2, MapLocation> mapLocation in mapLocations)
             {
@@ -114,9 +108,9 @@ namespace RandoMap
                 rect.localRotation = Quaternion.identity;
                 rect.localScale = Vector3.one;
                 rect.localPosition = new Vector2(16 * mapLocation.Key.x, 16 * mapLocation.Key.y);
-                rect.sizeDelta = markSize;
+                rect.sizeDelta = new Vector2(10, 10);
                 mapLocation.Value.Image = rect.gameObject.AddComponent<Image>();
-                Main.MapTracker.Log($"Creating mark at " + rect.localPosition);
+                mapLocation.Value.Image.sprite = mapMarker;
             }
         }
 
@@ -292,20 +286,7 @@ namespace RandoMap
             return inventory;
         }
 
-        //private Transform m_MapRenderer;
-        //private Transform MapRenderer
-        //{
-        //    get
-        //    {
-        //        if (m_MapRenderer == null)
-        //        {
-        //            m_MapRenderer = Object.FindObjectOfType<NewMapMenuWidget>()?.transform.Find("Background/Map/MapMask/MapRoot/RootRenderer_0");
-        //        }
-        //        return m_MapRenderer;
-        //    }
-        //}
-
-        private Dictionary<Vector2, MapLocation> mapLocations = new Dictionary<Vector2, MapLocation>()
+        private readonly Dictionary<Vector2, MapLocation> mapLocations = new Dictionary<Vector2, MapLocation>()
         {
             // Holy Line
             { new Vector2(17, 41), new MapLocation("QI31") },
