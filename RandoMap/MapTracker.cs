@@ -239,7 +239,7 @@ namespace RandoMap
                     DoorLocation enterDoor = currentDoors.Pop();
                     if (checkedDoors.Contains(enterDoor)) continue;
 
-                    if (enterDoor.Logic == null || Parser.EvaluateExpression(enterDoor.Logic, inventory))
+                    if (Parser.EvaluateExpression(enterDoor.Logic, inventory))
                     {
                         DoorLocation exitDoor = Main.Randomizer.itemShuffler.GetTargetDoor(enterDoor.Id);
                         if (exitDoor == null) exitDoor = allDoorLocations[enterDoor.OriginalDoor];

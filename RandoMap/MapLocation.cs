@@ -79,7 +79,7 @@ namespace RandoMap
     {
         public static bool IsReachable(this ItemLocation location, List<string> visibleRooms, BlasphemousInventory inventory)
         {
-            return visibleRooms.Contains(location.GetSpecialRoom()) && (location.Logic == null || Parser.EvaluateExpression(location.GetSpecialLogic(), inventory));
+            return visibleRooms.Contains(location.GetSpecialRoom()) && Parser.EvaluateExpression(location.GetSpecialLogic(), inventory);
         }
 
         public static bool ShouldBeTracked(this ItemLocation location, Config config)
