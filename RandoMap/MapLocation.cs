@@ -1,4 +1,5 @@
-﻿using BlasphemousRandomizer.ItemRando;
+﻿using BlasphemousRandomizer;
+using BlasphemousRandomizer.ItemRando;
 using Framework.Managers;
 using LogicParser;
 using System.Collections.Generic;
@@ -23,14 +24,14 @@ namespace RandoMap
             multipleLocations = locationIds;
         }
 
-        public CollectionStatus GetCurrentStatus(BlasphemousInventory inventory, List<string> visibleRooms)
+        public CollectionStatus GetCurrentStatus(Config config, BlasphemousInventory inventory, List<string> visibleRooms)
         {
             if (singleLocation != null) // Only one location for this cell
             {
                 ItemLocation itemLocation = Main.Randomizer.data.itemLocations[singleLocation];
 
                 // Check if the location has already been collected
-                if (Core.Events.GetFlag(itemLocation.GetSpecialFlag()))
+                if (!itemLocation.ShouldBeTracked(config) || Core.Events.GetFlag(itemLocation.GetSpecialFlag()))
                     return CollectionStatus.AllCollected;
 
                 // Check if the location is in logic
@@ -45,7 +46,7 @@ namespace RandoMap
                     ItemLocation itemLocation = Main.Randomizer.data.itemLocations[locationId];
 
                     // Check if the location has already been collected
-                    if (Core.Events.GetFlag(itemLocation.GetSpecialFlag()))
+                    if (!itemLocation.ShouldBeTracked(config) || Core.Events.GetFlag(itemLocation.GetSpecialFlag()))
                         continue;
 
                     // Check if the location is in logic
@@ -79,6 +80,19 @@ namespace RandoMap
         public static bool IsReachable(this ItemLocation location, List<string> visibleRooms, BlasphemousInventory inventory)
         {
             return visibleRooms.Contains(location.GetSpecialRoom()) && (location.Logic == null || Parser.EvaluateExpression(location.GetSpecialLogic(), inventory));
+        }
+
+        public static bool ShouldBeTracked(this ItemLocation location, Config config)
+        {
+            if (!config.ShuffleSwordSkills && location.Type == 1)
+                return false;
+            if (!config.ShuffleThorns && location.Type == 2)
+                return false;
+            if (!config.ShuffleBootsOfPleading && location.Id == "RE401")
+                return false;
+            if (!config.ShufflePurifiedHand && location.Id == "RE402")
+                return false;
+            return true;
         }
 
         public static string GetSpecialFlag(this ItemLocation location)

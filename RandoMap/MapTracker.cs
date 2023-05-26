@@ -62,6 +62,7 @@ namespace RandoMap
             if (DisplayLocationMarks) // Determine how marks should be shown based on logic
             {
                 // Get current inventory based on items
+                Config config = Main.Randomizer.GameSettings;
                 BlasphemousInventory inventory = CreateCurrentInventory(out List<string> visibleRooms);
 
                 // Check if each one has been collected or is in logic
@@ -73,7 +74,7 @@ namespace RandoMap
                         LogError(cellPosition + " is not a cell that contains locations!");
                         continue;
                     }
-                    MapLocation.CollectionStatus collectionStatus = mapLocation.GetCurrentStatus(inventory, visibleRooms);
+                    MapLocation.CollectionStatus collectionStatus = mapLocation.GetCurrentStatus(config, inventory, visibleRooms);
 
                     mark.gameObject.SetActive(collectionStatus != MapLocation.CollectionStatus.AllCollected);
                     if (collectionStatus == MapLocation.CollectionStatus.NoneReachable)
@@ -83,7 +84,6 @@ namespace RandoMap
                     else if (collectionStatus == MapLocation.CollectionStatus.AllReachable)
                         mapLocation.Image.color = Color.green;
                 }
-
             }
             else // Hide all marks
             {
