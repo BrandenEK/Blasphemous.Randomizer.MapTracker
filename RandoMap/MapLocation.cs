@@ -35,11 +35,12 @@ namespace RandoMap
                     return CollectionStatus.AllCollected;
 
                 // Check if the location is in logic
-                return itemLocation.IsReachable(visibleRooms, inventory) ? CollectionStatus.AllReachable : CollectionStatus.NoneReachable;
+                return itemLocation.IsReachable(itemLocation, visibleRooms, inventory) ? CollectionStatus.AllReachable : CollectionStatus.NoneReachable;
             }
             else if (multipleLocations != null) // Multiple locations for this cell
             {
                 bool atLeastOneReachable = false, atLeastOneNotReachable = false;
+                ItemLocation firstLocation = Main.Randomizer.data.itemLocations[multipleLocations[0]];
 
                 foreach (string locationId in multipleLocations)
                 {
@@ -50,7 +51,7 @@ namespace RandoMap
                         continue;
 
                     // Check if the location is in logic
-                    if (itemLocation.IsReachable(visibleRooms, inventory))
+                    if (itemLocation.IsReachable(firstLocation, visibleRooms, inventory))
                         atLeastOneReachable = true;
                     else
                         atLeastOneNotReachable = true;
@@ -77,9 +78,9 @@ namespace RandoMap
 
     public static class LogicExtensions
     {
-        public static bool IsReachable(this ItemLocation location, List<string> visibleRooms, BlasphemousInventory inventory)
+        public static bool IsReachable(this ItemLocation location, ItemLocation firstLocation, List<string> visibleRooms, BlasphemousInventory inventory)
         {
-            return visibleRooms.Contains(location.GetSpecialRoom()) && Parser.EvaluateExpression(location.GetSpecialLogic(), inventory);
+            return visibleRooms.Contains(location.GetSpecialRoom(firstLocation)) && Parser.EvaluateExpression(location.GetSpecialLogic(), inventory);
         }
 
         public static bool ShouldBeTracked(this ItemLocation location, Config config)
@@ -122,8 +123,13 @@ namespace RandoMap
             }
         }
 
-        public static string GetSpecialRoom(this ItemLocation location)
+        public static string GetSpecialRoom(this ItemLocation location, ItemLocation firstLocation)
         {
+            if (location.Type == 1) // Sword skills need to change their location to their shrine room
+            {
+                return firstLocation.Room;
+            }
+
             switch (location.Id)
             {
                 case "RB18": return "D02Z03S06";

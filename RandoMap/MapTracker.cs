@@ -296,7 +296,7 @@ namespace RandoMap
             { new Vector2(27, 41), new MapLocation("RESCUED_CHERUB_07") },
             // Albero
             { new Vector2(29, 40), new MapLocation("QI65") },
-            { new Vector2(30, 40), new MapLocation("Sword[D01Z02S06]") },
+            { new Vector2(30, 40), new MapLocation("Sword[D01Z02S06]", "COMBO_1", "COMBO_2", "COMBO_3", "CHARGED_1", "CHARGED_2", "CHARGED_3", "RANGED_1", "RANGED_2", "RANGED_3", "LUNGE_1", "LUNGE_2", "LUNGE_3", "VERTICAL_1", "VERTICAL_2", "VERTICAL_3") },
             { new Vector2(30, 41), new MapLocation("RE02", "RE04", "RE10") },
             { new Vector2(31, 41), new MapLocation("QI66", "Tirso[500]", "Tirso[1000]", "Tirso[2000]", "Tirso[5000]", "Tirso[10000]", "QI56") },
             { new Vector2(31, 42), new MapLocation("RB01") },
@@ -328,7 +328,7 @@ namespace RandoMap
             { new Vector2(55, 30), new MapLocation("CO21") },
             { new Vector2(56, 30), new MapLocation("RESCUED_CHERUB_33", "RB26") },
             // Cistern
-            { new Vector2(31, 30), new MapLocation("Sword[D01Z05S24]") },
+            { new Vector2(31, 30), new MapLocation("Sword[D01Z05S24]", "COMBO_1", "COMBO_2", "COMBO_3", "CHARGED_1", "CHARGED_2", "CHARGED_3", "RANGED_1", "RANGED_2", "RANGED_3", "LUNGE_1", "LUNGE_2", "LUNGE_3", "VERTICAL_1", "VERTICAL_2", "VERTICAL_3") },
             { new Vector2(32, 30), new MapLocation("QI75") },
             { new Vector2(33, 20), new MapLocation("CO44") },
             { new Vector2(33, 31), new MapLocation("RESCUED_CHERUB_22") },
@@ -391,7 +391,7 @@ namespace RandoMap
             { new Vector2(31, 63), new MapLocation("QI40", "QI57") },
             { new Vector2(31, 64), new MapLocation("Lady[D02Z03S15]") },
             { new Vector2(31, 65), new MapLocation("QI61") },
-            { new Vector2(33, 63), new MapLocation("Sword[D02Z03S13]") },
+            { new Vector2(33, 63), new MapLocation("Sword[D02Z03S13]", "COMBO_1", "COMBO_2", "COMBO_3", "CHARGED_1", "CHARGED_2", "CHARGED_3", "RANGED_1", "RANGED_2", "RANGED_3", "LUNGE_1", "LUNGE_2", "LUNGE_3", "VERTICAL_1", "VERTICAL_2", "VERTICAL_3") },
             // Mountains
             { new Vector2(15, 36), new MapLocation("QI63") },
             { new Vector2(18, 36), new MapLocation("RESCUED_CHERUB_16") },
@@ -442,7 +442,7 @@ namespace RandoMap
             { new Vector2(70, 46), new MapLocation("BS05") },
             { new Vector2(73, 44), new MapLocation("CO20") },
             { new Vector2(73, 46), new MapLocation("RESCUED_CHERUB_29") },
-            { new Vector2(73, 47), new MapLocation("Sword[D04Z02S12]") },
+            { new Vector2(73, 47), new MapLocation("Sword[D04Z02S12]", "COMBO_1", "COMBO_2", "COMBO_3", "CHARGED_1", "CHARGED_2", "CHARGED_3", "RANGED_1", "RANGED_2", "RANGED_3", "LUNGE_1", "LUNGE_2", "LUNGE_3", "VERTICAL_1", "VERTICAL_2", "VERTICAL_3") },
             { new Vector2(74, 41), new MapLocation("Oil[D04Z02S14]") },
             { new Vector2(75, 44), new MapLocation("CO34") },
             { new Vector2(80, 45), new MapLocation("RB33") },
@@ -467,7 +467,7 @@ namespace RandoMap
             { new Vector2(69, 39), new MapLocation("CO18") },
             { new Vector2(69, 41), new MapLocation("QI80") },
             { new Vector2(70, 40), new MapLocation("RESCUED_CHERUB_01") },
-            { new Vector2(71, 39), new MapLocation("Sword[D05Z01S13]") },
+            { new Vector2(71, 39), new MapLocation("Sword[D05Z01S13]", "COMBO_1", "COMBO_2", "COMBO_3", "CHARGED_1", "CHARGED_2", "CHARGED_3", "RANGED_1", "RANGED_2", "RANGED_3", "LUNGE_1", "LUNGE_2", "LUNGE_3", "VERTICAL_1", "VERTICAL_2", "VERTICAL_3") },
             { new Vector2(71, 40), new MapLocation("RB301") },
             { new Vector2(72, 34), new MapLocation("RESCUED_CHERUB_32") },
             { new Vector2(73, 39), new MapLocation("QI62") },
@@ -491,7 +491,7 @@ namespace RandoMap
             { new Vector2(78, 51), new MapLocation("Lady[D06Z01S24]") },
             { new Vector2(78, 56), new MapLocation("QI04") },
             { new Vector2(79, 54), new MapLocation("CO40") },
-            { new Vector2(80, 56), new MapLocation("Sword[D06Z01S11]") },
+            { new Vector2(80, 56), new MapLocation("Sword[D06Z01S11]", "COMBO_1", "COMBO_2", "COMBO_3", "CHARGED_1", "CHARGED_2", "CHARGED_3", "RANGED_1", "RANGED_2", "RANGED_3", "LUNGE_1", "LUNGE_2", "LUNGE_3", "VERTICAL_1", "VERTICAL_2", "VERTICAL_3") },
             // Deambulatory
             { new Vector2(80, 59), new MapLocation("PR08") },
             // Bridge
@@ -524,7 +524,7 @@ namespace RandoMap
             { new Vector2(05, 43), new MapLocation("RESCUED_CHERUB_06") },
             { new Vector2(05, 44), new MapLocation("PR203") },
             { new Vector2(07, 43), new MapLocation("RB204") },
-            { new Vector2(11, 37), new MapLocation("Sword[D17Z01S08]") },
+            { new Vector2(11, 37), new MapLocation("Sword[D17Z01S08]", "COMBO_1", "COMBO_2", "COMBO_3", "CHARGED_1", "CHARGED_2", "CHARGED_3", "RANGED_1", "RANGED_2", "RANGED_3", "LUNGE_1", "LUNGE_2", "LUNGE_3", "VERTICAL_1", "VERTICAL_2", "VERTICAL_3") },
             { new Vector2(11, 40), new MapLocation("QI35") },
             { new Vector2(12, 40), new MapLocation("RE401", "CO25") },
             { new Vector2(13, 40), new MapLocation("RB25") },
@@ -539,9 +539,6 @@ namespace RandoMap
             { new Vector2(81, 27), new MapLocation("RB201") },
             // Resting Place
             { new Vector2(41, 30), new MapLocation("QI203") },
-
-            // Sword Skills
-            //{ new Vector2(), new MapLocation("") },
         };
     }
 }

@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using Framework.Managers;
 using Framework.Map;
 using Gameplay.UI.Others.MenuLogic;
 using System.Collections.Generic;
@@ -25,6 +26,15 @@ namespace RandoMap
             {
                 renderer.Config.MovementSpeed = 400f;
             }
+        }
+    }
+
+    [HarmonyPatch(typeof(NewMapManager), "GetAllRevealedCells", typeof(MapData))]
+    public class MapGetRevealed_Patch
+    {
+        public static void Postfix()
+        {
+            Main.MapTracker.LogWarning("Getting all revealed cells");
         }
     }
 }
