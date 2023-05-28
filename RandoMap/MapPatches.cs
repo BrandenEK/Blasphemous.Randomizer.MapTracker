@@ -6,9 +6,9 @@ using System.Collections.Generic;
 
 namespace RandoMap
 {
-    // Refresh map when pausing or toggling marks
+    // Change speed of map scrolling
     [HarmonyPatch(typeof(NewMapMenuWidget), "Initialize")]
-    public class MapMenuWidgetInit_Patch
+    public class MapMenuWidgetSpeed_Patch
     {
         public static void Postfix(List<MapRenderer> ___MapRenderers)
         {
@@ -16,8 +16,21 @@ namespace RandoMap
             {
                 renderer.Config.MovementSpeed = 400f;
             }
+        }
+    }
 
+    // Refresh map when pausing or toggling marks
+    [HarmonyPatch(typeof(NewMapMenuWidget), "OnShow")]
+    public class MapMenuWidgetShow_Patch
+    {
+        public static void Postfix()
+        {
             Main.MapTracker.RefreshMap();
+        }
+
+        public static System.Exception Finalizer()
+        {
+            return null;
         }
     }
 
@@ -27,10 +40,28 @@ namespace RandoMap
     {
         public static bool Prefix(MapData map, ref List<CellData> __result)
         {
-            if (!Main.MapTracker.DisplayLocationMarks)
+            if (!Main.MapTracker.DisplayLocationMarks || !Main.MapTracker.IsShowingMap)
                 return true;
 
-            __result = map.Cells;
+            __result = new List<CellData>();
+            foreach (CellData cell in map.Cells)
+            {
+                bool hasSecret = false;
+                foreach (SecretData secret in map.Secrets.Values)
+                {
+                    if (secret.Cells.ContainsKey(cell.CellKey))
+                    {
+                        hasSecret = true;
+                        __result.Add(secret.Cells[cell.CellKey]);
+                        break;
+                    }
+                }
+                if (!hasSecret)
+                {
+                    __result.Add(cell);
+                }
+            }
+
             return false;
         }
     }
@@ -39,7 +70,7 @@ namespace RandoMap
     {
         public static bool Prefix(MapData ___CurrentMap, ref List<CellKey> __result)
         {
-            if (!Main.MapTracker.DisplayLocationMarks)
+            if (!Main.MapTracker.DisplayLocationMarks || !Main.MapTracker.IsShowingMap)
                 return true;
 
             __result = new List<CellKey>();

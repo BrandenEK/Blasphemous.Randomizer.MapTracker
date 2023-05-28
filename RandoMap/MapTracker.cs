@@ -21,7 +21,8 @@ namespace RandoMap
 
         public bool DisplayLocationMarks { get; private set; }
         public bool DisplayLocationsLastFrame { get; private set; }
-        //public bool ShowingMap { get; set; }
+
+        public bool IsShowingMap => PauseWidget.IsActive() && PauseWidget.CurrentWidget == PauseWidget.ChildWidgets.MAP && PauseWidget.InitialMapMode == PauseWidget.MapModes.SHOW;
 
         protected override void Initialize()
         {
@@ -34,20 +35,12 @@ namespace RandoMap
 
         protected override void Update()
         {
-            // Debug
-            if (UnityEngine.Input.GetKeyDown(KeyCode.P))
-            {
-                CellKey cell = Core.NewMapManager.GetPlayerCell();
-                LogWarning("Current cell position: " + new Vector2(cell.X, cell.Y));
-            }
-
             // Toggle display status of location marks
-            if (UnityEngine.Input.GetKeyDown(KeyCode.F1))
+            if (UnityEngine.Input.GetKeyDown(KeyCode.F1) && IsShowingMap)
             {
                 DisplayLocationMarks = !DisplayLocationMarks;
-                NewMapMenuWidget widget = Object.FindObjectOfType<NewMapMenuWidget>();
-                widget.Initialize();
-                widget.OnShow(PauseWidget.MapModes.SHOW);
+                MapWidget.Initialize();
+                MapWidget.OnShow(PauseWidget.MapModes.SHOW);
             }
 
             DisplayLocationsLastFrame = DisplayLocationMarks;
@@ -55,16 +48,12 @@ namespace RandoMap
 
         public void RefreshMap()
         {
-            // Only refresh map if paused
-            if (!Core.Logic.IsPaused) return;
-            LogWarning("Refreshing map locations!");
-
             if (marksHolder == null)
                 CreateMarksHolder();
             if (marksHolder != null)
                 marksHolder.SetAsLastSibling();
 
-            if (DisplayLocationMarks) // Determine how marks should be shown based on logic
+            if (DisplayLocationMarks && IsShowingMap) // Determine how marks should be shown based on logic
             {
                 // Get current inventory based on items
                 Config config = Main.Randomizer.GameSettings;
@@ -100,7 +89,7 @@ namespace RandoMap
         private void CreateMarksHolder()
         {
             Log("Creating marks holder");
-            Transform rootRenderer = Object.FindObjectOfType<NewMapMenuWidget>()?.transform.Find("Background/Map/MapMask/MapRoot/RootRenderer_0");
+            Transform rootRenderer = MapWidget?.transform.Find("Background/Map/MapMask/MapRoot/RootRenderer_0");
             if (rootRenderer == null) return;
 
             marksHolder = new GameObject("MarksHolder", typeof(RectTransform)).transform as RectTransform;
@@ -290,6 +279,12 @@ namespace RandoMap
 
             return inventory;
         }
+
+        private NewMapMenuWidget _mapWidget;
+        private NewMapMenuWidget MapWidget => _mapWidget ?? (_mapWidget = Object.FindObjectOfType<NewMapMenuWidget>());
+
+        private PauseWidget _pauseWidget;
+        private PauseWidget PauseWidget => _pauseWidget ?? (_pauseWidget = Object.FindObjectOfType<PauseWidget>());
 
         private readonly Dictionary<Vector2, MapLocation> mapLocations = new Dictionary<Vector2, MapLocation>()
         {
