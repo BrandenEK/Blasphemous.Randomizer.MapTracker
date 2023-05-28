@@ -20,6 +20,7 @@ namespace RandoMap
         private Sprite mapMarker;
 
         public bool DisplayLocationMarks { get; private set; }
+        public bool DisplayLocationsLastFrame { get; private set; }
         //public bool ShowingMap { get; set; }
 
         protected override void Initialize()
@@ -44,8 +45,12 @@ namespace RandoMap
             if (UnityEngine.Input.GetKeyDown(KeyCode.F1))
             {
                 DisplayLocationMarks = !DisplayLocationMarks;
-                RefreshMap();
+                NewMapMenuWidget widget = Object.FindObjectOfType<NewMapMenuWidget>();
+                widget.Initialize();
+                widget.OnShow(PauseWidget.MapModes.SHOW);
             }
+
+            DisplayLocationsLastFrame = DisplayLocationMarks;
         }
 
         public void RefreshMap()
