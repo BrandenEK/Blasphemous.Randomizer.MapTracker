@@ -19,6 +19,9 @@ namespace RandoMap
         private Transform marksHolder;
         private Sprite mapMarker;
 
+        private BlasphemousInventory currentInventory;
+        private List<string> currentVisibleRooms;
+
         public bool DisplayLocationMarks { get; private set; }
         public bool DisplayLocationsLastFrame { get; private set; }
 
@@ -31,6 +34,16 @@ namespace RandoMap
 
             if (FileUtil.loadDataImages("marker.png", 10, 10, 10, 0, true, out Sprite[] images))
                 mapMarker = images[0];
+
+            ResetInventory();
+        }
+
+        protected override void LevelLoaded(string oldLevel, string newLevel)
+        {
+            if (newLevel == "MainMenu")
+            {
+                ResetInventory();
+            }
         }
 
         protected override void Update()
@@ -46,6 +59,12 @@ namespace RandoMap
             DisplayLocationsLastFrame = DisplayLocationMarks;
         }
 
+        public void ResetInventory()
+        {
+            currentInventory = null;
+            currentVisibleRooms = null;
+        }
+
         public void RefreshMap()
         {
             if (marksHolder == null)
@@ -55,9 +74,11 @@ namespace RandoMap
 
             if (DisplayLocationMarks && IsShowingMap) // Determine how marks should be shown based on logic
             {
-                // Get current inventory based on items
                 Config config = Main.Randomizer.GameSettings;
-                BlasphemousInventory inventory = CreateCurrentInventory(out List<string> visibleRooms);
+                if (currentInventory == null) // If new items have been obtained, need to recalculate inventory data
+                {
+                    currentInventory = CreateCurrentInventory(config, out currentVisibleRooms);
+                }
 
                 // Check if each one has been collected or is in logic
                 foreach (Transform mark in marksHolder)
@@ -68,7 +89,7 @@ namespace RandoMap
                         LogError(cellPosition + " is not a cell that contains locations!");
                         continue;
                     }
-                    MapLocation.CollectionStatus collectionStatus = mapLocation.GetCurrentStatus(config, inventory, visibleRooms);
+                    MapLocation.CollectionStatus collectionStatus = mapLocation.GetCurrentStatus(config, currentInventory, currentVisibleRooms);
 
                     mark.gameObject.SetActive(collectionStatus != MapLocation.CollectionStatus.AllCollected);
                     if (collectionStatus == MapLocation.CollectionStatus.NoneReachable)
@@ -108,9 +129,9 @@ namespace RandoMap
             }
         }
 
-        private BlasphemousInventory CreateCurrentInventory(out List<string> visibleRooms)
+        private BlasphemousInventory CreateCurrentInventory(Config settings, out List<string> visibleRooms)
         {
-            Config settings = Main.Randomizer.GameSettings;
+            Log("Calculating current inventory");
             BlasphemousInventory inventory = new BlasphemousInventory();
             inventory.SetConfigSettings(settings);
             

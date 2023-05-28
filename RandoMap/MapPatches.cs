@@ -1,7 +1,8 @@
-﻿using HarmonyLib;
+﻿using BlasphemousRandomizer.ItemRando;
 using Framework.Managers;
 using Framework.Map;
 using Gameplay.UI.Others.MenuLogic;
+using HarmonyLib;
 using System.Collections.Generic;
 
 namespace RandoMap
@@ -93,6 +94,16 @@ namespace RandoMap
         public static bool Prefix()
         {
             return Main.MapTracker.DisplayLocationMarks == Main.MapTracker.DisplayLocationsLastFrame;
+        }
+    }
+
+    // Recalculate inventory when item is added
+    [HarmonyPatch(typeof(Item), "addToInventory")]
+    class ItemAdd_Patch
+    {
+        public static void Postfix()
+        {
+            Main.MapTracker.ResetInventory();
         }
     }
 }
