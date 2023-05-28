@@ -12,7 +12,7 @@ namespace RandoMap
     {
         public const string MOD_ID = "com.damocles.blasphemous.rando-map";
         public const string MOD_NAME = "Rando Map";
-        public const string MOD_VERSION = "0.1.0";
+        public const string MOD_VERSION = "1.0.0";
 
         public static MapTracker MapTracker { get; private set; }
         public static Randomizer Randomizer { get; private set; }
