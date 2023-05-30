@@ -16,6 +16,7 @@ namespace RandoMap
         public MapTracker(string modId, string modName, string modVersion) : base(modId, modName, modVersion) { }
 
         private Transform marksHolder;
+        private Text locationText;
         private Sprite mapMarker;
 
         private BlasphemousInventory currentInventory;
@@ -70,6 +71,8 @@ namespace RandoMap
                 CreateMarksHolder();
             if (marksHolder != null)
                 marksHolder.SetAsLastSibling();
+            if (locationText == null)
+                CreateLocationText();
 
             if (DisplayLocationMarks && IsShowingMap) // Determine how marks should be shown based on logic
             {
@@ -126,6 +129,26 @@ namespace RandoMap
                 mapLocation.Value.Image = rect.gameObject.AddComponent<Image>();
                 mapLocation.Value.Image.sprite = mapMarker;
             }
+        }
+
+        private void CreateLocationText()
+        {
+            //LogWarning(MapWidget.transform.DisplayHierarchy(10, false));
+            Log("Creating location text");
+            Transform iconHolder = MapWidget?.transform.Find("Background/LowerZone/MarkSelector/IconList");
+            if (iconHolder == null) return;
+
+            // Hide icons in holder
+            ((RectTransform)iconHolder.transform.GetChild(0)).anchoredPosition += Vector2.down * 100;
+
+            // Create text in holder
+            locationText = Object.Instantiate(MapWidget.CherubsText.gameObject).GetComponent<Text>();
+            locationText.rectTransform.SetParent(iconHolder, false);
+            locationText.rectTransform.anchorMin = Vector2.zero;
+            locationText.rectTransform.anchorMax = Vector2.one;
+            locationText.rectTransform.anchoredPosition = Vector2.zero;
+            locationText.alignment = TextAnchor.MiddleCenter;
+            locationText.text = "Location name";
         }
 
         private BlasphemousInventory CreateCurrentInventory(Config settings, out List<string> visibleRooms)

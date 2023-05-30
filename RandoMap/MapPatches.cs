@@ -97,6 +97,31 @@ namespace RandoMap
         }
     }
 
+    // Prevent placing marks
+    [HarmonyPatch(typeof(NewMapMenuWidget), "MarkPressed")]
+    public class MapMenuWidgetMark_Patch
+    {
+        public static bool Prefix() => false;
+    }
+
+    // Process tab input
+    [HarmonyPatch(typeof(NewMapMenuWidget), "UITabLeft")]
+    public class MapMenuWidgetTabLeft_Patch
+    {
+        public static void Postfix()
+        {
+            // Do something
+        }
+    }
+    [HarmonyPatch(typeof(NewMapMenuWidget), "UITabRight")]
+    public class MapMenuWidgetTabRight_Patch
+    {
+        public static void Postfix()
+        {
+            // Do something
+        }
+    }
+
     // Recalculate inventory when item is added
     [HarmonyPatch(typeof(Item), "addToInventory")]
     class ItemAdd_Patch
