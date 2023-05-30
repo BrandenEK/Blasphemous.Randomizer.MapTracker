@@ -133,13 +133,14 @@ namespace RandoMap
 
         private void CreateLocationText()
         {
-            //LogWarning(MapWidget.transform.DisplayHierarchy(10, false));
+            //LogWarning(MapWidget.transform.Find("Background/LowerZone").DisplayHierarchy(10, false));
             Log("Creating location text");
             Transform iconHolder = MapWidget?.transform.Find("Background/LowerZone/MarkSelector/IconList");
             if (iconHolder == null) return;
 
-            // Hide icons in holder
+            // Hide marks stuff
             ((RectTransform)iconHolder.transform.GetChild(0)).anchoredPosition += Vector2.down * 100;
+            ((RectTransform)MapWidget.transform.Find("Background/LowerZone/Buttons/Marker")).anchoredPosition += Vector2.down * 100;
 
             // Create text in holder
             locationText = Object.Instantiate(MapWidget.CherubsText.gameObject).GetComponent<Text>();

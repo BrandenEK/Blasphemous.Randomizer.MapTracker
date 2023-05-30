@@ -104,6 +104,16 @@ namespace RandoMap
         public static bool Prefix() => false;
     }
 
+    // Change selected map cell when moving map
+    [HarmonyPatch(typeof(NewMapMenuWidget), "UpdateCellData")]
+    public class MapMenuWidgetUpdateCell_Patch
+    {
+        public static void Postfix(CellData ___CurrentCell)
+        {
+            Main.MapTracker.LogWarning("Moving to new cell!");
+        }
+    }
+
     // Process tab input
     [HarmonyPatch(typeof(NewMapMenuWidget), "UITabLeft")]
     public class MapMenuWidgetTabLeft_Patch
@@ -111,6 +121,7 @@ namespace RandoMap
         public static void Postfix()
         {
             // Do something
+            Main.MapTracker.LogWarning("tab left!");
         }
     }
     [HarmonyPatch(typeof(NewMapMenuWidget), "UITabRight")]
@@ -119,6 +130,7 @@ namespace RandoMap
         public static void Postfix()
         {
             // Do something
+            Main.MapTracker.LogWarning("tab right!");
         }
     }
 
