@@ -31,7 +31,7 @@ namespace RandoMap
             DisableFileLogging = true;
             DisplayLocationMarks = true;
 
-            if (FileUtil.loadDataImages("marker.png", 10, 10, 10, 0, true, out Sprite[] images))
+            if (FileUtil.loadDataImages("marker.png", new Vector2Int(10, 10), new Vector2(0.5f, 0.5f), 10, 0, true, out Sprite[] images))
                 mapMarker = images[0];
 
             ResetInventory();
@@ -48,7 +48,7 @@ namespace RandoMap
         protected override void Update()
         {
             // Toggle display status of location marks
-            if (UnityEngine.Input.GetKeyDown(KeyCode.F1) && IsShowingMap)
+            if (Input.GetKeyDown("ToggleLocations") && IsShowingMap)
             {
                 DisplayLocationMarks = !DisplayLocationMarks;
                 MapWidget.Initialize();
@@ -301,10 +301,10 @@ namespace RandoMap
         }
 
         private NewMapMenuWidget _mapWidget;
-        private NewMapMenuWidget MapWidget => _mapWidget ?? (_mapWidget = Object.FindObjectOfType<NewMapMenuWidget>());
+        private NewMapMenuWidget MapWidget => _mapWidget ??= _mapWidget = Object.FindObjectOfType<NewMapMenuWidget>();
 
         private PauseWidget _pauseWidget;
-        private PauseWidget PauseWidget => _pauseWidget ?? (_pauseWidget = Object.FindObjectOfType<PauseWidget>());
+        private PauseWidget PauseWidget => _pauseWidget ??= _pauseWidget = Object.FindObjectOfType<PauseWidget>();
 
         private readonly Dictionary<Vector2, MapLocation> mapLocations = new Dictionary<Vector2, MapLocation>()
         {
