@@ -140,7 +140,11 @@ namespace RandoMap
 
             // Hide marks stuff
             ((RectTransform)iconHolder.transform.GetChild(0)).anchoredPosition += Vector2.down * 100;
-            ((RectTransform)MapWidget.transform.Find("Background/LowerZone/Buttons/Marker")).anchoredPosition += Vector2.down * 100;
+            //Transform buttonHolder = MapWidget.transform.Find("Background/LowerZone/Buttons/Marker"); // This somehow doesnt work
+            //foreach (Transform button in buttonHolder)
+            //{
+            //    ((RectTransform)button).anchoredPosition += Vector2.down * 100;
+            //}
 
             // Create text in holder
             locationText = Object.Instantiate(MapWidget.CherubsText.gameObject).GetComponent<Text>();

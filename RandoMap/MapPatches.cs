@@ -15,7 +15,7 @@ namespace RandoMap
         {
             foreach (MapRenderer renderer in ___MapRenderers)
             {
-                renderer.Config.MovementSpeed = 400f;
+                renderer.Config.MovementSpeed = 200f;
             }
         }
     }
@@ -110,7 +110,7 @@ namespace RandoMap
     {
         public static void Postfix(CellData ___CurrentCell)
         {
-            Main.MapTracker.LogWarning("Moving to new cell!");
+            //Main.MapTracker.LogWarning("Moving to new cell!");
         }
     }
 
