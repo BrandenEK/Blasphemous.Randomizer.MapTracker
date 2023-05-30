@@ -24,6 +24,17 @@ namespace RandoMap
             multipleLocations = locationIds;
         }
 
+        public string LocationName
+        {
+            get
+            {
+                if (singleLocation != null)
+                    return Main.Randomizer.data.itemLocations[singleLocation].Name;
+                else
+                    return Main.Randomizer.data.itemLocations[multipleLocations[0]].Name;
+            }
+        }
+
         public CollectionStatus GetCurrentStatus(Config config, BlasphemousInventory inventory, List<string> visibleRooms)
         {
             if (singleLocation != null) // Only one location for this cell

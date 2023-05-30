@@ -110,7 +110,7 @@ namespace RandoMap
     {
         public static void Postfix(CellData ___CurrentCell)
         {
-            //Main.MapTracker.LogWarning("Moving to new cell!");
+            Main.MapTracker.UpdateSelectedCell(___CurrentCell);
         }
     }
 

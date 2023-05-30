@@ -3,6 +3,7 @@ using BlasphemousRandomizer;
 using BlasphemousRandomizer.ItemRando;
 using BlasphemousRandomizer.DoorRando;
 using Framework.Managers;
+using Framework.Map;
 using Gameplay.UI.Others.MenuLogic;
 using LogicParser;
 using System.Collections.Generic;
@@ -24,6 +25,8 @@ namespace RandoMap
 
         public bool DisplayLocationMarks { get; private set; }
         public bool DisplayLocationsLastFrame { get; private set; }
+
+        private MapLocation currentSelectedCell = null;
 
         public bool IsShowingMap => PauseWidget.IsActive() && PauseWidget.CurrentWidget == PauseWidget.ChildWidgets.MAP && PauseWidget.InitialMapMode == PauseWidget.MapModes.SHOW;
 
@@ -74,6 +77,8 @@ namespace RandoMap
             if (locationText == null)
                 CreateLocationText();
 
+            currentSelectedCell = null;
+
             if (DisplayLocationMarks && IsShowingMap) // Determine how marks should be shown based on logic
             {
                 Config config = Main.Randomizer.GameSettings;
@@ -107,6 +112,29 @@ namespace RandoMap
                 foreach (Transform mark in marksHolder)
                     mark.gameObject.SetActive(false);
             }
+        }
+
+        public void UpdateSelectedCell(CellData currentCell)
+        {
+            if (locationText == null)
+                CreateLocationText();
+
+            if (DisplayLocationMarks && IsShowingMap && currentCell != null) // Ensure on regular map and hovering a real cell
+            {
+                Vector2 currentPosition = currentCell.CellKey.GetVector2();
+                if (mapLocations.TryGetValue(currentPosition, out MapLocation currentLocation)) // Ensure hovering a cell with an item location
+                {
+                    if (currentSelectedCell != currentLocation) // If locations are different, update text, otherwise leave text
+                    {
+                        currentSelectedCell = currentLocation;
+                        locationText.text = currentLocation.LocationName;
+                    }
+                    return;
+                }
+            }
+
+            currentSelectedCell = null;
+            locationText.text = string.Empty;
         }
 
         private void CreateMarksHolder()
