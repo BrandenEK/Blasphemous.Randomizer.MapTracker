@@ -124,12 +124,16 @@ namespace RandoMap
                 Vector2 currentPosition = currentCell.CellKey.GetVector2();
                 if (mapLocations.TryGetValue(currentPosition, out MapLocation currentLocation)) // Ensure hovering a cell with an item location
                 {
-                    if (currentSelectedCell != currentLocation) // If locations are different, update text, otherwise leave text
+                    MapLocation.CollectionStatus currentStatus = currentLocation.GetCurrentStatus(Main.Randomizer.GameSettings, currentInventory, currentVisibleRooms);
+                    if (currentStatus != MapLocation.CollectionStatus.AllCollected) // Ensure there are still items to collect at the location
                     {
-                        currentSelectedCell = currentLocation;
-                        locationText.text = currentLocation.LocationName;
+                        if (currentSelectedCell != currentLocation) // If locations are different, update text, otherwise leave text
+                        {
+                            currentSelectedCell = currentLocation;
+                            locationText.text = currentLocation.LocationName;
+                        }
+                        return;
                     }
-                    return;
                 }
             }
 
