@@ -3,6 +3,10 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# Blas Modding
+[Ee]xport/
+[Ll]ib/
+
 # User-specific files
 *.rsuser
 *.suo

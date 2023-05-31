@@ -6,22 +6,18 @@ using UnityEngine;
 
 namespace RandoMap
 {
-    [BepInPlugin(MOD_ID, MOD_NAME, MOD_VERSION)]
+    [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
     [BepInDependency("com.damocles.blasphemous.modding-api", "1.4.0")]
     [BepInDependency("com.damocles.blasphemous.randomizer", "2.0.0")]
     [BepInProcess("Blasphemous.exe")]
     public class Main : BaseUnityPlugin
     {
-        public const string MOD_ID = "com.damocles.blasphemous.rando-map";
-        public const string MOD_NAME = "Rando Map";
-        public const string MOD_VERSION = "1.1.0";
-
         public static MapTracker MapTracker { get; private set; }
         public static Randomizer Randomizer { get; private set; }
 
         private void Start()
         {
-            MapTracker = new MapTracker(MOD_ID, MOD_NAME, MOD_VERSION);
+            MapTracker = new MapTracker(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION);
             Randomizer = BlasphemousRandomizer.Main.Randomizer;
         }
     }
