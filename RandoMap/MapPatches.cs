@@ -120,8 +120,7 @@ namespace RandoMap
     {
         public static void Postfix()
         {
-            // Do something
-            Main.MapTracker.LogWarning("tab left!");
+            Main.MapTracker.TabLocationIndex(false);
         }
     }
     [HarmonyPatch(typeof(NewMapMenuWidget), "UITabRight")]
@@ -129,8 +128,7 @@ namespace RandoMap
     {
         public static void Postfix()
         {
-            // Do something
-            Main.MapTracker.LogWarning("tab right!");
+            Main.MapTracker.TabLocationIndex(true);
         }
     }
 

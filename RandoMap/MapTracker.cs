@@ -27,6 +27,7 @@ namespace RandoMap
         public bool DisplayLocationsLastFrame { get; private set; }
 
         private MapLocation currentSelectedCell = null;
+        private int currentSelectedIndex = 0;
 
         public bool IsShowingMap => PauseWidget.IsActive() && PauseWidget.CurrentWidget == PauseWidget.ChildWidgets.MAP && PauseWidget.InitialMapMode == PauseWidget.MapModes.SHOW;
 
@@ -78,6 +79,7 @@ namespace RandoMap
                 CreateLocationText();
 
             currentSelectedCell = null;
+            currentSelectedIndex = 0;
 
             if (DisplayLocationMarks && IsShowingMap) // Determine how marks should be shown based on logic
             {
@@ -155,14 +157,27 @@ namespace RandoMap
             if (currentSelectedCell != currentLocation)
             {
                 currentSelectedCell = currentLocation;
-                locationText.text = currentLocation.SelectedLocationName(0); // Get name at index
-                MapLocation.CollectionStatus selectedStatus = currentLocation.SelectedLocationStatus(0, currentInventory, currentVisibleRooms);
-                if (selectedStatus == MapLocation.CollectionStatus.AllReachable) locationText.color = Color.green;
-                else if (selectedStatus == MapLocation.CollectionStatus.NoneReachable) locationText.color = Color.red;
-                else if (selectedStatus == MapLocation.CollectionStatus.AllCollected) locationText.color = Color.gray;
-                else locationText.color = Color.black;
-                // Reset selectedIdx to 0
+                currentSelectedIndex = 0;
+                UpdateLocationText();
             }
+        }
+
+        public void TabLocationIndex(bool right)
+        {
+            if (currentSelectedCell == null) return;
+
+            currentSelectedIndex += right ? 1 : -1; // Check to get next valid location
+            UpdateLocationText();
+        }
+
+        private void UpdateLocationText()
+        {
+            locationText.text = currentSelectedCell.SelectedLocationName(currentSelectedIndex);
+            MapLocation.CollectionStatus selectedStatus = currentSelectedCell.SelectedLocationStatus(currentSelectedIndex, currentInventory, currentVisibleRooms);
+            if (selectedStatus == MapLocation.CollectionStatus.AllReachable) locationText.color = Color.green;
+            else if (selectedStatus == MapLocation.CollectionStatus.NoneReachable) locationText.color = Color.red;
+            else if (selectedStatus == MapLocation.CollectionStatus.AllCollected) locationText.color = Color.gray;
+            else locationText.color = Color.black;
         }
 
         private void CreateMarksHolder()
