@@ -119,26 +119,50 @@ namespace RandoMap
             if (locationText == null)
                 CreateLocationText();
 
-            if (DisplayLocationMarks && IsShowingMap && currentCell != null) // Ensure on regular map and hovering a real cell
+            // Ensure that the location marks are showing and you are hovering over a real cell
+            if (!DisplayLocationMarks || !IsShowingMap || currentCell == null)
             {
-                Vector2 currentPosition = currentCell.CellKey.GetVector2();
-                if (mapLocations.TryGetValue(currentPosition, out MapLocation currentLocation)) // Ensure hovering a cell with an item location
-                {
-                    MapLocation.CollectionStatus currentStatus = currentLocation.GetCurrentStatus(Main.Randomizer.GameSettings, currentInventory, currentVisibleRooms);
-                    if (currentStatus != MapLocation.CollectionStatus.AllCollected) // Ensure there are still items to collect at the location
-                    {
-                        if (currentSelectedCell != currentLocation) // If locations are different, update text, otherwise leave text
-                        {
-                            currentSelectedCell = currentLocation;
-                            locationText.text = currentLocation.LocationName;
-                        }
-                        return;
-                    }
-                }
+                currentSelectedCell = null;
+                locationText.text = string.Empty;
+                return;
             }
 
-            currentSelectedCell = null;
-            locationText.text = string.Empty;
+            // Ensure that the current cell has an item location on it
+            Vector2 currentPosition = currentCell.CellKey.GetVector2();
+            if (!mapLocations.ContainsKey(currentPosition))
+            {
+                currentSelectedCell = null;
+                locationText.text = string.Empty;
+                return;
+            }
+
+            // Ensure that not all of the locations on the cell have been collected
+            Config config = Main.Randomizer.GameSettings;
+            if (currentInventory == null) // If new items have been obtained, need to recalculate inventory data
+            {
+                currentInventory = CreateCurrentInventory(config, out currentVisibleRooms);
+            }
+            MapLocation currentLocation = mapLocations[currentPosition];
+            MapLocation.CollectionStatus currentStatus = currentLocation.GetCurrentStatus(Main.Randomizer.GameSettings, currentInventory, currentVisibleRooms);
+            if (currentStatus == MapLocation.CollectionStatus.AllCollected)
+            {
+                currentSelectedCell = null;
+                locationText.text = string.Empty;
+                return;
+            }
+
+            // Only update the text if the current cell has changed
+            if (currentSelectedCell != currentLocation)
+            {
+                currentSelectedCell = currentLocation;
+                locationText.text = currentLocation.SelectedLocationName(0); // Get name at index
+                MapLocation.CollectionStatus selectedStatus = currentLocation.SelectedLocationStatus(0, currentInventory, currentVisibleRooms);
+                if (selectedStatus == MapLocation.CollectionStatus.AllReachable) locationText.color = Color.green;
+                else if (selectedStatus == MapLocation.CollectionStatus.NoneReachable) locationText.color = Color.red;
+                else if (selectedStatus == MapLocation.CollectionStatus.AllCollected) locationText.color = Color.gray;
+                else locationText.color = Color.black;
+                // Reset selectedIdx to 0
+            }
         }
 
         private void CreateMarksHolder()

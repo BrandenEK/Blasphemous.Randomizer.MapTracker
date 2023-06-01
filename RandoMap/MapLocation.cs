@@ -24,17 +24,6 @@ namespace RandoMap
             multipleLocations = locationIds;
         }
 
-        public string LocationName
-        {
-            get
-            {
-                if (singleLocation != null)
-                    return Main.Randomizer.data.itemLocations[singleLocation].Name;
-                else
-                    return Main.Randomizer.data.itemLocations[multipleLocations[0]].Name;
-            }
-        }
-
         public CollectionStatus GetCurrentStatus(Config config, BlasphemousInventory inventory, List<string> visibleRooms)
         {
             if (singleLocation != null) // Only one location for this cell
@@ -76,6 +65,49 @@ namespace RandoMap
             }
 
             throw new System.Exception("Map cell locations not set up correctly!");
+        }
+
+        public string SelectedLocationName(int idx)
+        {
+            if (singleLocation != null)
+            {
+                return Main.Randomizer.data.itemLocations[singleLocation].Name;
+            }
+
+            if (idx >= 0 && idx < multipleLocations.Length)
+            {
+                return Main.Randomizer.data.itemLocations[multipleLocations[idx]].Name;
+            }
+
+            Main.MapTracker.LogError("Location idx out of bounds for " + multipleLocations[0]);
+            return "???";
+        }
+
+        public CollectionStatus SelectedLocationStatus(int idx, BlasphemousInventory inventory, List<string> visibleRooms)
+        {
+            if (singleLocation != null)
+            {
+                ItemLocation location = Main.Randomizer.data.itemLocations[singleLocation];
+
+                if (Core.Events.GetFlag(location.GetSpecialFlag()))
+                    return CollectionStatus.AllCollected;
+
+                return location.IsReachable(location, visibleRooms, inventory) ? CollectionStatus.AllReachable : CollectionStatus.NoneReachable;
+            }
+
+            if (idx >= 0 && idx < multipleLocations.Length)
+            {
+                ItemLocation location = Main.Randomizer.data.itemLocations[multipleLocations[idx]];
+                ItemLocation firstLocation = Main.Randomizer.data.itemLocations[multipleLocations[0]];
+
+                if (Core.Events.GetFlag(location.GetSpecialFlag()))
+                    return CollectionStatus.AllCollected;
+
+                return location.IsReachable(firstLocation, visibleRooms, inventory) ? CollectionStatus.AllReachable : CollectionStatus.NoneReachable;
+            }
+
+            Main.MapTracker.LogError("Location idx out of bounds for " + multipleLocations[0]);
+            return CollectionStatus.NoneReachable;
         }
 
         public enum CollectionStatus
