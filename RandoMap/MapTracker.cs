@@ -174,10 +174,15 @@ namespace RandoMap
         {
             locationText.text = currentSelectedCell.SelectedLocationName(currentSelectedIndex);
             MapLocation.CollectionStatus selectedStatus = currentSelectedCell.SelectedLocationStatus(currentSelectedIndex, currentInventory, currentVisibleRooms);
-            if (selectedStatus == MapLocation.CollectionStatus.AllReachable) locationText.color = Color.green;
-            else if (selectedStatus == MapLocation.CollectionStatus.NoneReachable) locationText.color = Color.red;
-            else if (selectedStatus == MapLocation.CollectionStatus.AllCollected) locationText.color = Color.gray;
+            if (selectedStatus == MapLocation.CollectionStatus.AllReachable) locationText.color = RGBColor(56, 149, 30);
+            else if (selectedStatus == MapLocation.CollectionStatus.NoneReachable) locationText.color = RGBColor(198, 35, 20);
+            else if (selectedStatus == MapLocation.CollectionStatus.AllCollected) locationText.color = RGBColor(90, 90, 90);
             else locationText.color = Color.black;
+
+            Color RGBColor(int r, int g, int b)
+            {
+                return new Color(r / 255f, g / 255f, b / 255f);
+            }
         }
 
         private void CreateMarksHolder()
