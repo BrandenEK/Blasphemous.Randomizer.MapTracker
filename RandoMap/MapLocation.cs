@@ -71,12 +71,12 @@ namespace RandoMap
         {
             if (singleLocation != null)
             {
-                return Main.Randomizer.data.itemLocations[singleLocation].Name;
+                return Main.Randomizer.data.itemLocations[singleLocation].GetSpecialName();
             }
 
             if (idx >= 0 && idx < multipleLocations.Length)
             {
-                return Main.Randomizer.data.itemLocations[multipleLocations[idx]].Name;
+                return Main.Randomizer.data.itemLocations[multipleLocations[idx]].GetSpecialName();
             }
 
             Main.MapTracker.LogError("Location idx out of bounds for " + multipleLocations[0]);
@@ -187,6 +187,25 @@ namespace RandoMap
                 case "QI80": return "D05Z01S17";
                 case "QI81": return "D09Z01S13";
                 default:     return location.Room;
+            }
+        }
+
+        public static string GetSpecialName(this ItemLocation location)
+        {
+            switch (location.Id)
+            {
+                case "RB18": return "Red candle";
+                case "RB19": return "Red candle";
+                case "RB25": return "Blue candle";
+                case "RB26": return "Blue candle";
+                case "QI32": return "Guilt arena";
+                case "QI33": return "Guilt arena";
+                case "QI34": return "Guilt arena";
+                case "QI35": return "Guilt arena";
+                case "QI79": return "Guilt arena";
+                case "QI80": return "Guilt arena";
+                case "QI81": return "Guilt arena";
+                default: return location.Name;
             }
         }
     }
