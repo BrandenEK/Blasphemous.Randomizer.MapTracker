@@ -67,6 +67,35 @@ namespace RandoMap
             throw new System.Exception("Map cell locations not set up correctly!");
         }
 
+        // (-1, 1) is used to select the first available location when switching to a new cell, but
+        // be careful with this because it could cause an infinite loop if there isnt a valid one after that
+        // I just didn't feel like fixing that
+        public int NextSelectableIndex(int idx, int direction, Config config)
+        {
+            if (singleLocation != null)
+            {
+                return 0;
+            }
+
+            int startIdx = idx, currIdx = idx;
+            do
+            {
+                if (currIdx == 0 && direction < 0)
+                    currIdx = multipleLocations.Length - 1;
+                else if (currIdx == multipleLocations.Length - 1 && direction > 0)
+                    currIdx = 0;
+                else
+                    currIdx += direction;
+
+                if (Main.Randomizer.data.itemLocations[multipleLocations[currIdx]].ShouldBeTracked(config))
+                    return currIdx;
+            }
+            while (currIdx != startIdx);
+
+            // Failed to find a different selectable one, so return the same
+            return idx;
+        }
+
         public string SelectedLocationName(int idx)
         {
             if (singleLocation != null)

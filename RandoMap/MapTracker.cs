@@ -157,16 +157,16 @@ namespace RandoMap
             if (currentSelectedCell != currentLocation)
             {
                 currentSelectedCell = currentLocation;
-                currentSelectedIndex = 0;
+                currentSelectedIndex = currentLocation.NextSelectableIndex(-1, 1, Main.Randomizer.GameSettings);
                 UpdateLocationText();
             }
         }
 
-        public void TabLocationIndex(bool right)
+        public void TabLocationIndex(int direction)
         {
             if (currentSelectedCell == null) return;
 
-            currentSelectedIndex += right ? 1 : -1; // Check to get next valid location
+            currentSelectedIndex = currentSelectedCell.NextSelectableIndex(currentSelectedIndex, direction, Main.Randomizer.GameSettings);
             UpdateLocationText();
         }
 
