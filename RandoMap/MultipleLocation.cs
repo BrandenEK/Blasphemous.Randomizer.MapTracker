@@ -1,6 +1,5 @@
 ﻿using BlasphemousRandomizer;
 using BlasphemousRandomizer.ItemRando;
-using Framework.Managers;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
@@ -26,7 +25,7 @@ namespace RandoMap
             ItemLocation itemLocation = Main.Randomizer.data.itemLocations[locations[idx]];
             ItemLocation firstLocation = Main.Randomizer.data.itemLocations[locations[0]];
 
-            if (Core.Events.GetFlag(itemLocation.GetSpecialFlag()))
+            if (itemLocation.IsCollected())
                 return CollectionStatus.Finished;
 
             bool isReachable = itemLocation.IsReachable(firstLocation, visibleRooms, inventory);
@@ -57,7 +56,7 @@ namespace RandoMap
                     continue;
                 }
 
-                if (Core.Events.GetFlag(itemLocation.GetSpecialFlag()))
+                if (itemLocation.IsCollected())
                 {
                     numCollected++;
                     continue;

@@ -96,6 +96,11 @@ namespace RandoMap
             }
         }
 
+        public static bool IsCollected(this ItemLocation location)
+        {
+            return Core.Events.GetFlag(location.GetSpecialFlag()) || Core.Events.GetFlag("APLOCATION_" + location.Id);
+        }
+
         public static bool IsHinted(this ItemLocation location)
         {
             // Needs to account for special locations
