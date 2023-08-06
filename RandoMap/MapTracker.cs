@@ -411,8 +411,9 @@ namespace RandoMap
             { CollectionStatus.AllUnreachable, RGBColor(207, 16, 16) },
             { CollectionStatus.SomeReachable, RGBColor(255, 159, 32) },
             { CollectionStatus.AllReachable, RGBColor(32, 255, 32) },
-            { CollectionStatus.HintedUnreachable, RGBColor(192, 16, 255) },
-            { CollectionStatus.HintedReachable, RGBColor(32, 255, 255) },
+            { CollectionStatus.HintedAllUnreachable, RGBColor(192, 16, 255) },
+            { CollectionStatus.HintedSomeReachable, RGBColor(32, 255, 255) },
+            { CollectionStatus.HintedReachable, RGBColor(48, 64, 255) },
         };
 
         private readonly Dictionary<Vector2, IMapLocation> mapLocations = new()

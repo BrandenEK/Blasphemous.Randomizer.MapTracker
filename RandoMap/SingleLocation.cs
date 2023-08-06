@@ -26,7 +26,7 @@ namespace RandoMap
 
             if (isHinted)
             {
-                return isReachable ? CollectionStatus.HintedReachable : CollectionStatus.HintedUnreachable;
+                return isReachable ? CollectionStatus.HintedReachable : CollectionStatus.HintedAllUnreachable;
             }
             else
             {
@@ -49,7 +49,7 @@ namespace RandoMap
 
             if (isHinted)
             {
-                return isReachable ? CollectionStatus.HintedReachable : CollectionStatus.HintedUnreachable;
+                return isReachable ? CollectionStatus.HintedReachable : CollectionStatus.HintedAllUnreachable;
             }
             else
             {

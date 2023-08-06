@@ -8,7 +8,8 @@ namespace RandoMap
         AllUnreachable,
         SomeReachable,
         AllReachable,
-        HintedUnreachable,
+        HintedAllUnreachable,
+        HintedSomeReachable,
         HintedReachable,
     }
 }

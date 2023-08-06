@@ -33,7 +33,7 @@ namespace RandoMap
 
             if (isHinted)
             {
-                return isReachable ? CollectionStatus.HintedReachable : CollectionStatus.HintedUnreachable;
+                return isReachable ? CollectionStatus.HintedReachable : CollectionStatus.HintedAllUnreachable;
             }
             else
             {
@@ -85,7 +85,12 @@ namespace RandoMap
             if (numUntracked == locations.Length)
                 return CollectionStatus.Untracked;
             if (numHinted > 0)
-                return CollectionStatus.HintedUnreachable;
+            {
+                if (numReachable > 0)
+                    return CollectionStatus.HintedSomeReachable;
+                else
+                    return CollectionStatus.HintedAllUnreachable;
+            }
 
             int totalLocations = locations.Length - numUntracked;
 
