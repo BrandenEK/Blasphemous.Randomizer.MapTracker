@@ -3,11 +3,12 @@ namespace RandoMap
 {
     public enum CollectionStatus
     {
-        NoneReachable,
+        Untracked,
+        Finished,
+        AllUnreachable,
         SomeReachable,
         AllReachable,
-        AllCollected,
-        HintReachable,
-        HintUnreachable,
+        HintedUnreachable,
+        HintedReachable,
     }
 }
