@@ -98,14 +98,14 @@ namespace RandoMap
                         LogError(cellPosition + " is not a cell that contains locations!");
                         continue;
                     }
-                    MapLocation.CollectionStatus collectionStatus = mapLocation.GetCurrentStatus(config, currentInventory, currentVisibleRooms);
+                    CollectionStatus collectionStatus = mapLocation.GetCurrentStatus(config, currentInventory, currentVisibleRooms);
 
-                    mark.gameObject.SetActive(collectionStatus != MapLocation.CollectionStatus.AllCollected);
-                    if (collectionStatus == MapLocation.CollectionStatus.NoneReachable)
+                    mark.gameObject.SetActive(collectionStatus != CollectionStatus.AllCollected);
+                    if (collectionStatus == CollectionStatus.NoneReachable)
                         mapLocation.Image.color = Color.red;
-                    else if (collectionStatus == MapLocation.CollectionStatus.SomeReachable)
+                    else if (collectionStatus == CollectionStatus.SomeReachable)
                         mapLocation.Image.color = Color.yellow;
-                    else if (collectionStatus == MapLocation.CollectionStatus.AllReachable)
+                    else if (collectionStatus == CollectionStatus.AllReachable)
                         mapLocation.Image.color = Color.green;
                 }
             }
@@ -145,8 +145,8 @@ namespace RandoMap
                 currentInventory = CreateCurrentInventory(config, out currentVisibleRooms);
             }
             MapLocation currentLocation = mapLocations[currentPosition];
-            MapLocation.CollectionStatus currentStatus = currentLocation.GetCurrentStatus(Main.Randomizer.GameSettings, currentInventory, currentVisibleRooms);
-            if (currentStatus == MapLocation.CollectionStatus.AllCollected)
+            CollectionStatus currentStatus = currentLocation.GetCurrentStatus(Main.Randomizer.GameSettings, currentInventory, currentVisibleRooms);
+            if (currentStatus == CollectionStatus.AllCollected)
             {
                 currentSelectedCell = null;
                 locationText.text = string.Empty;
@@ -173,10 +173,10 @@ namespace RandoMap
         private void UpdateLocationText()
         {
             locationText.text = currentSelectedCell.SelectedLocationName(currentSelectedIndex);
-            MapLocation.CollectionStatus selectedStatus = currentSelectedCell.SelectedLocationStatus(currentSelectedIndex, currentInventory, currentVisibleRooms);
-            if (selectedStatus == MapLocation.CollectionStatus.AllReachable) locationText.color = RGBColor(56, 149, 30);
-            else if (selectedStatus == MapLocation.CollectionStatus.NoneReachable) locationText.color = RGBColor(198, 35, 20);
-            else if (selectedStatus == MapLocation.CollectionStatus.AllCollected) locationText.color = RGBColor(90, 90, 90);
+            CollectionStatus selectedStatus = currentSelectedCell.SelectedLocationStatus(currentSelectedIndex, currentInventory, currentVisibleRooms);
+            if (selectedStatus == CollectionStatus.AllReachable) locationText.color = RGBColor(56, 149, 30);
+            else if (selectedStatus == CollectionStatus.NoneReachable) locationText.color = RGBColor(198, 35, 20);
+            else if (selectedStatus == CollectionStatus.AllCollected) locationText.color = RGBColor(90, 90, 90);
             else locationText.color = Color.black;
 
             Color RGBColor(int r, int g, int b)
@@ -410,7 +410,7 @@ namespace RandoMap
         private PauseWidget _pauseWidget;
         private PauseWidget PauseWidget => _pauseWidget ??= _pauseWidget = Object.FindObjectOfType<PauseWidget>();
 
-        private readonly Dictionary<Vector2, MapLocation> mapLocations = new Dictionary<Vector2, MapLocation>()
+        private readonly Dictionary<Vector2, MapLocation> mapLocations = new()
         {
             // Holy Line
             { new Vector2(17, 41), new MapLocation("QI31") },

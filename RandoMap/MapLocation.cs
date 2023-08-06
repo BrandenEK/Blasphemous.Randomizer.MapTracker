@@ -138,14 +138,6 @@ namespace RandoMap
             Main.MapTracker.LogError("Location idx out of bounds for " + multipleLocations[0]);
             return CollectionStatus.NoneReachable;
         }
-
-        public enum CollectionStatus
-        {
-            NoneReachable,
-            SomeReachable,
-            AllReachable,
-            AllCollected,
-        }
     }
 
     public static class LogicExtensions
