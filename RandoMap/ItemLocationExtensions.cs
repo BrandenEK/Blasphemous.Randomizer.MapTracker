@@ -98,13 +98,68 @@ namespace RandoMap
 
         public static bool IsCollected(this ItemLocation location)
         {
-            return Core.Events.GetFlag(location.GetSpecialFlag()) || Core.Events.GetFlag("APLOCATION_" + location.Id);
+            switch (location.Id) // These special locations should never show as collected out from the multiworld
+            {
+                case "RB18":
+                case "RB19":
+                case "RB25":
+                case "RB26":
+                case "QI32":
+                case "QI33":
+                case "QI34":
+                case "QI35":
+                case "QI79":
+                case "QI80":
+                case "QI81":
+                case "Amanecida[D02Z02S14]":
+                case "Amanecida[D03Z01S03]":
+                case "Amanecida[D04Z01S04]":
+                case "Amanecida[D09Z01S01]":
+                    return Core.Events.GetFlag(location.GetSpecialFlag());
+                default:
+                    return Core.Events.GetFlag(location.GetSpecialFlag()) || Core.Events.GetFlag("APLOCATION_" + location.Id);
+            }
         }
 
         public static bool IsHinted(this ItemLocation location)
         {
-            // Needs to account for special locations
-            return Core.Events.GetFlag("APHINT_" + location.Id);
+            string[] idsToCheck; // If checking for any of these special locations, also check for the others in the group
+            switch (location.Id)
+            {
+                case "RB18":
+                case "RB19":
+                    idsToCheck = Data.redCandleIds; break;
+                case "RB25":
+                case "RB26":
+                    idsToCheck = Data.blueCandleIds; break;
+                case "QI32":
+                case "QI33":
+                case "QI34":
+                case "QI35":
+                case "QI79":
+                case "QI80":
+                case "QI81":
+                    idsToCheck = Data.guiltArenaIds; break;
+                case "Amanecida[D02Z02S14]":
+                case "Amanecida[D03Z01S03]":
+                case "Amanecida[D04Z01S04]":
+                case "Amanecida[D09Z01S01]":
+                    idsToCheck = Data.amanecidaIds; break;
+                default:
+                    return Core.Events.GetFlag("APHINT_" + location.Id);
+            }
+
+            bool thisLocationHinted = Core.Events.GetFlag("APHINT_" + location.Id);
+            if (thisLocationHinted)
+                return true;
+
+            foreach (string id in idsToCheck)
+            {
+                if (Core.Events.GetFlag("APHINT_" + id) && !Core.Events.GetFlag("LOCATION_" + id))
+                    return true;
+            }
+
+            return false;
         }
     }
 }

@@ -82,7 +82,9 @@ namespace RandoMap
                 }
             }
 
-            if (numUntracked == locations.Length)
+            int totalLocations = locations.Length;
+
+            if (numUntracked == totalLocations)
                 return CollectionStatus.Untracked;
             if (numHinted > 0)
             {
@@ -92,10 +94,13 @@ namespace RandoMap
                     return CollectionStatus.HintedAllUnreachable;
             }
 
-            int totalLocations = locations.Length - numUntracked;
+            totalLocations -= numUntracked;
 
             if (numCollected == totalLocations)
                 return CollectionStatus.Finished;
+
+            totalLocations -= numCollected;
+
             if (numReachable == totalLocations)
                 return CollectionStatus.AllReachable;
             if (numUnreachable == totalLocations)
