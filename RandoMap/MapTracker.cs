@@ -1,11 +1,11 @@
-﻿using ModdingAPI;
-using BlasphemousRandomizer;
-using BlasphemousRandomizer.ItemRando;
+﻿using BlasphemousRandomizer;
 using BlasphemousRandomizer.DoorRando;
+using BlasphemousRandomizer.ItemRando;
 using Framework.Managers;
 using Framework.Map;
 using Gameplay.UI.Others.MenuLogic;
 using LogicParser;
+using ModdingAPI;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -100,13 +100,8 @@ namespace RandoMap
                     }
                     CollectionStatus collectionStatus = mapLocation.GetCurrentStatus(config, currentInventory, currentVisibleRooms);
 
-                    mark.gameObject.SetActive(collectionStatus != CollectionStatus.AllCollected);
-                    if (collectionStatus == CollectionStatus.NoneReachable)
-                        mapLocation.Image.color = Color.red;
-                    else if (collectionStatus == CollectionStatus.SomeReachable)
-                        mapLocation.Image.color = Color.yellow;
-                    else if (collectionStatus == CollectionStatus.AllReachable)
-                        mapLocation.Image.color = Color.green;
+                    mark.gameObject.SetActive(true);
+                    mapLocation.Image.color = colorCodes[collectionStatus];
                 }
             }
             else // Hide all marks
@@ -144,14 +139,15 @@ namespace RandoMap
             {
                 currentInventory = CreateCurrentInventory(config, out currentVisibleRooms);
             }
+
             MapLocation currentLocation = mapLocations[currentPosition];
             CollectionStatus currentStatus = currentLocation.GetCurrentStatus(Main.Randomizer.GameSettings, currentInventory, currentVisibleRooms);
-            if (currentStatus == CollectionStatus.AllCollected)
-            {
-                currentSelectedCell = null;
-                locationText.text = string.Empty;
-                return;
-            }
+            //if (currentStatus == CollectionStatus.AllCollected)
+            //{
+            //    currentSelectedCell = null;
+            //    locationText.text = string.Empty;
+            //    return;
+            //}
 
             // Only update the text if the current cell has changed
             if (currentSelectedCell != currentLocation)
@@ -173,16 +169,9 @@ namespace RandoMap
         private void UpdateLocationText()
         {
             locationText.text = currentSelectedCell.SelectedLocationName(currentSelectedIndex);
-            CollectionStatus selectedStatus = currentSelectedCell.SelectedLocationStatus(currentSelectedIndex, currentInventory, currentVisibleRooms);
-            if (selectedStatus == CollectionStatus.AllReachable) locationText.color = RGBColor(56, 149, 30);
-            else if (selectedStatus == CollectionStatus.NoneReachable) locationText.color = RGBColor(198, 35, 20);
-            else if (selectedStatus == CollectionStatus.AllCollected) locationText.color = RGBColor(90, 90, 90);
-            else locationText.color = Color.black;
 
-            Color RGBColor(int r, int g, int b)
-            {
-                return new Color(r / 255f, g / 255f, b / 255f);
-            }
+            CollectionStatus selectedStatus = currentSelectedCell.SelectedLocationStatus(currentSelectedIndex, currentInventory, currentVisibleRooms);
+            locationText.color = colorCodes[selectedStatus];
         }
 
         private void CreateMarksHolder()
@@ -324,8 +313,8 @@ namespace RandoMap
 
             // Set up starting room
             visibleRooms = new List<string>();
-            List<DoorLocation> checkedDoors = new List<DoorLocation>();
-            List<DoorLocation> unreachableDoors = new List<DoorLocation>();
+            var checkedDoors = new List<DoorLocation>();
+            var unreachableDoors = new List<DoorLocation>();
             List<DoorLocation> previousUnreachableDoors;
             Stack<DoorLocation> currentDoors;
 
@@ -409,6 +398,21 @@ namespace RandoMap
 
         private PauseWidget _pauseWidget;
         private PauseWidget PauseWidget => _pauseWidget ??= _pauseWidget = Object.FindObjectOfType<PauseWidget>();
+
+        private static Color RGBColor(int r, int g, int b)
+        {
+            return new Color(r / 255f, g / 255f, b / 255f);
+        }
+
+        private readonly Dictionary<CollectionStatus, Color> colorCodes = new()
+        {
+            { CollectionStatus.NoneReachable, RGBColor(207, 16, 16) },
+            { CollectionStatus.SomeReachable, RGBColor(255, 159, 32) },
+            { CollectionStatus.AllReachable, RGBColor(32, 255, 32) },
+            { CollectionStatus.AllCollected, RGBColor(63, 63, 63) },
+            { CollectionStatus.HintReachable, RGBColor(32, 255, 255) },
+            { CollectionStatus.HintUnreachable, RGBColor(192, 16, 255) },
+        };
 
         private readonly Dictionary<Vector2, MapLocation> mapLocations = new()
         {

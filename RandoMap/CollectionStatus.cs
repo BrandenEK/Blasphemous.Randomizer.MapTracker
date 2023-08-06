@@ -7,5 +7,7 @@ namespace RandoMap
         SomeReachable,
         AllReachable,
         AllCollected,
+        HintReachable,
+        HintUnreachable,
     }
 }
