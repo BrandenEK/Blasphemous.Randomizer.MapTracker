@@ -6,7 +6,7 @@
     <BepInExPluginGuid>com.damocles.blasphemous.rando-map</BepInExPluginGuid>
     <BepInExPluginName>Rando Map</BepInExPluginName>
     <Description>An in-game map tracker for the Blasphemous Randomizer</Description>
-    <Version>1.1.0</Version>
+    <Version>1.2.0</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
