@@ -4,7 +4,6 @@ using BlasphemousRandomizer.ItemRando;
 using Framework.Managers;
 using Framework.Map;
 using Gameplay.UI.Others.MenuLogic;
-using LogicParser;
 using ModdingAPI;
 using System.Collections.Generic;
 using UnityEngine;
@@ -346,7 +345,7 @@ namespace RandoMap
                     DoorLocation enterDoor = currentDoors.Pop();
                     if (checkedDoors.Contains(enterDoor)) continue;
 
-                    if (Parser.EvaluateExpression(enterDoor.Logic, inventory))
+                    if (inventory.Evaluate(enterDoor.Logic))
                     {
                         DoorLocation exitDoor = Main.Randomizer.itemShuffler.GetTargetDoor(enterDoor.Id);
                         if (exitDoor == null) exitDoor = allDoorLocations[enterDoor.OriginalDoor];

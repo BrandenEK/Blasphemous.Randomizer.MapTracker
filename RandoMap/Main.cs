@@ -8,7 +8,7 @@ namespace RandoMap
 {
     [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
     [BepInDependency("com.damocles.blasphemous.modding-api", "1.4.0")]
-    [BepInDependency("com.damocles.blasphemous.randomizer", "2.0.0")]
+    [BepInDependency("com.damocles.blasphemous.randomizer", "2.0.10")]
     [BepInProcess("Blasphemous.exe")]
     public class Main : BaseUnityPlugin
     {

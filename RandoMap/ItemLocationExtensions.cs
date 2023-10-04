@@ -1,7 +1,6 @@
 ﻿using BlasphemousRandomizer;
 using BlasphemousRandomizer.ItemRando;
 using Framework.Managers;
-using LogicParser;
 using System.Collections.Generic;
 
 namespace RandoMap
@@ -10,7 +9,7 @@ namespace RandoMap
     {
         public static bool IsReachable(this ItemLocation location, ItemLocation firstLocation, List<string> visibleRooms, BlasphemousInventory inventory)
         {
-            return visibleRooms.Contains(location.GetSpecialRoom(firstLocation)) && Parser.EvaluateExpression(location.GetSpecialLogic(), inventory);
+            return visibleRooms.Contains(location.GetSpecialRoom(firstLocation)) && inventory.Evaluate(location.GetSpecialLogic());
         }
 
         public static bool ShouldBeTracked(this ItemLocation location, Config config)
