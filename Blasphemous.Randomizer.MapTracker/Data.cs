@@ -1,7 +1,7 @@
 ﻿
-namespace RandoMap
+namespace Blasphemous.Randomizer.MapTracker
 {
-    public static class Data
+    internal static class Data
     {
         public static readonly string[] redCandleIds =
         {

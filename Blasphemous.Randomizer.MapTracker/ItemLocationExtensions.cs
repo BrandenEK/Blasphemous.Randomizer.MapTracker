@@ -1,17 +1,25 @@
-﻿using BlasphemousRandomizer;
-using BlasphemousRandomizer.ItemRando;
+﻿using Blasphemous.Randomizer.ItemRando;
 using Framework.Managers;
 using System.Collections.Generic;
 
-namespace RandoMap
+namespace Blasphemous.Randomizer.MapTracker
 {
+    /// <summary>
+    /// Add functionality for Randomizer item locations
+    /// </summary>
     public static class ItemLocationExtensions
     {
+        /// <summary>
+        /// Whether this location is reachable
+        /// </summary>
         public static bool IsReachable(this ItemLocation location, ItemLocation firstLocation, List<string> visibleRooms, BlasphemousInventory inventory)
         {
             return visibleRooms.Contains(location.GetSpecialRoom(firstLocation)) && inventory.Evaluate(location.GetSpecialLogic());
         }
 
+        /// <summary>
+        /// If this location is randomized
+        /// </summary>
         public static bool ShouldBeTracked(this ItemLocation location, Config config)
         {
             if (!config.ShuffleSwordSkills && location.Type == 1)
@@ -25,6 +33,9 @@ namespace RandoMap
             return true;
         }
 
+        /// <summary>
+        /// Some locations have a special flag used for tracking it
+        /// </summary>
         public static string GetSpecialFlag(this ItemLocation location)
         {
             if (location.LocationFlag == null)
@@ -33,6 +44,9 @@ namespace RandoMap
                 return location.LocationFlag.Split('~')[0];
         }
 
+        /// <summary>
+        /// Some locations have special logic once you have access to their room
+        /// </summary>
         public static string GetSpecialLogic(this ItemLocation location)
         {
             switch (location.Id)
@@ -52,6 +66,9 @@ namespace RandoMap
             }
         }
 
+        /// <summary>
+        /// Some locations appear in multiple rooms
+        /// </summary>
         public static string GetSpecialRoom(this ItemLocation location, ItemLocation firstLocation)
         {
             if (location.Type == 1) // Sword skills need to change their location to their shrine room
@@ -76,6 +93,9 @@ namespace RandoMap
             }
         }
 
+        /// <summary>
+        /// Some locations should have a special name
+        /// </summary>
         public static string GetSpecialName(this ItemLocation location)
         {
             switch (location.Id)
@@ -95,6 +115,9 @@ namespace RandoMap
             }
         }
 
+        /// <summary>
+        /// Some locations use a special flag to determine if it is collected
+        /// </summary>
         public static bool IsCollected(this ItemLocation location)
         {
             switch (location.Id) // These special locations should never show as collected out from the multiworld
@@ -120,6 +143,9 @@ namespace RandoMap
             }
         }
 
+        /// <summary>
+        /// Checks if the location is hinted
+        /// </summary>
         public static bool IsHinted(this ItemLocation location)
         {
             string[] idsToCheck; // If checking for any of these special locations, also check for the others in the group
