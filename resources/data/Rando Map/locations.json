@@ -1,4 +1,5 @@
 [
+// The Holy Line
   {
     "x": 17,
     "y": 41,
@@ -24,6 +25,7 @@
     "y": 41,
     "locations": [ "RESCUED_CHERUB_07" ]
   },
+// Albero
   {
     "x": 29,
     "y": 40,
@@ -74,6 +76,7 @@
     "y": 41,
     "locations": [ "CO16" ]
   },
+// Wasteland of the Buried Churches
   {
     "x": 37,
     "y": 40,
@@ -109,6 +112,7 @@
     "y": 39,
     "locations": [ "QI06" ]
   },
+// Mercy Dreams
   {
     "x": 48,
     "y": 31,
@@ -174,6 +178,7 @@
     "y": 30,
     "locations": [ "RESCUED_CHERUB_33", "RB26" ]
   },
+// Desecrated Cistern
   {
     "x": 31,
     "y": 30,
@@ -269,11 +274,13 @@
     "y": 36,
     "locations": [ "QI45" ]
   },
+// Petrous
   {
     "x": 23,
     "y": 40,
     "locations": [ "QI101" ]
   },
+// Where Olive Trees Wither
   {
     "x": 34,
     "y": 47,
@@ -324,6 +331,7 @@
     "y": 47,
     "locations": [ "HE05" ]
   },
+// Graveyard of the Peaks
   {
     "x": 31,
     "y": 49,
@@ -414,6 +422,7 @@
     "y": 56,
     "locations": [ "RB106", "Amanecida[D02Z02S14]" ]
   },
+// Convent of Our Lady of the Charred Visage
   {
     "x": 22,
     "y": 63,
@@ -474,6 +483,7 @@
     "y": 63,
     "locations": [ "Sword[D02Z03S13]", "COMBO_1", "COMBO_2", "COMBO_3", "CHARGED_1", "CHARGED_2", "CHARGED_3", "RANGED_1", "RANGED_2", "RANGED_3", "LUNGE_1", "LUNGE_2", "LUNGE_3", "VERTICAL_1", "VERTICAL_2", "VERTICAL_3" ]
   },
+// Mountains of the Endless Dusk
   {
     "x": 15,
     "y": 36,
@@ -504,6 +514,7 @@
     "y": 37,
     "locations": [ "CO13" ]
   },
+// Jondo
   {
     "x": 14,
     "y": 33,
@@ -569,6 +580,7 @@
     "y": 32,
     "locations": [ "QI103" ]
   },
+// Grievance Ascends
   {
     "x": 21,
     "y": 22,
@@ -619,6 +631,7 @@
     "y": 19,
     "locations": [ "QI39" ]
   },
+// Patio of the Silent Steps
   {
     "x": 57,
     "y": 42,
@@ -664,6 +677,7 @@
     "y": 42,
     "locations": [ "Amanecida[D04Z01S04]" ]
   },
+// Mother of Mothers
   {
     "x": 67,
     "y": 43,
@@ -734,16 +748,19 @@
     "y": 46,
     "locations": [ "RE03", "QI54" ]
   },
+// Knot of the Three Words
   {
     "x": 73,
     "y": 41,
     "locations": [ "HE201" ]
   },
+// All the Tears of the Sea
   {
     "x": 85,
     "y": 42,
     "locations": [ "PR201" ]
   },
+// Library of the Negated Words
   {
     "x": 59,
     "y": 31,
@@ -834,6 +851,7 @@
     "y": 39,
     "locations": [ "RB19" ]
   },
+// The Sleeping Canvases
   {
     "x": 57,
     "y": 31,
@@ -869,6 +887,7 @@
     "y": 31,
     "locations": [ "CO31" ]
   },
+//  Archcathedral Rooftops
   {
     "x": 72,
     "y": 51,
@@ -924,11 +943,13 @@
     "y": 56,
     "locations": [ "Sword[D06Z01S11]", "COMBO_1", "COMBO_2", "COMBO_3", "CHARGED_1", "CHARGED_2", "CHARGED_3", "RANGED_1", "RANGED_2", "RANGED_3", "LUNGE_1", "LUNGE_2", "LUNGE_3", "VERTICAL_1", "VERTICAL_2", "VERTICAL_3" ]
   },
+// Deambulatory of his Holiness
   {
     "x": 80,
     "y": 59,
     "locations": [ "PR08" ]
   },
+// Bridge of the Three Calvaries
   {
     "x": 52,
     "y": 41,
@@ -939,6 +960,7 @@
     "y": 44,
     "locations": [ "HE101" ]
   },
+// Hall of the Dawning
   {
     "x": 55,
     "y": 47,
@@ -949,6 +971,7 @@
     "y": 44,
     "locations": [ "QI105" ]
   },
+// Wall of the Holy Prohibitions
   {
     "x": 55,
     "y": 51,
@@ -1039,6 +1062,7 @@
     "y": 52,
     "locations": [ "Amanecida[D09Z01S01]" ]
   },
+// Brotherhood of the Silent Sorrow
   {
     "x": 3,
     "y": 44,
@@ -1089,6 +1113,7 @@
     "y": 41,
     "locations": [ "RE01" ]
   },
+// Echoes of Salt
   {
     "x": 30,
     "y": 26,
@@ -1099,6 +1124,7 @@
     "y": 33,
     "locations": [ "RB108" ]
   },
+// Mourning and Havoc
   {
     "x": 43,
     "y": 25,
@@ -1114,6 +1140,7 @@
     "y": 27,
     "locations": [ "RB201" ]
   },
+// The Resting Place of the Sister
   {
     "x": 41,
     "y": 30,

@@ -48,6 +48,7 @@ public class MapTracker : BlasMod
         {
             PixelsPerUnit = 10
         });
+        FileHandler.LoadDataAsJson("locations.json", out LocationInfo[] info);
 
         DisplayLocationMarks = true;
         ResetInventory();
