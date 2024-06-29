@@ -1,0 +1,1149 @@
+[
+// The Holy Line
+  {
+    "x": 17,
+    "y": 41,
+    "locations": [ "QI31" ]
+  },
+  {
+    "x": 23,
+    "y": 41,
+    "locations": [ "PR14", "RB07" ]
+  },
+  {
+    "x": 25,
+    "y": 40,
+    "locations": [ "CO04" ]
+  },
+  {
+    "x": 27,
+    "y": 40,
+    "locations": [ "QI55" ]
+  },
+  {
+    "x": 27,
+    "y": 41,
+    "locations": [ "RESCUED_CHERUB_07" ]
+  },
+// Albero
+  {
+    "x": 29,
+    "y": 40,
+    "locations": [ "QI65" ]
+  },
+  {
+    "x": 30,
+    "y": 40,
+    "locations": [ "Sword[D01Z02S06]", "COMBO_1", "COMBO_2", "COMBO_3", "CHARGED_1", "CHARGED_2", "CHARGED_3", "RANGED_1", "RANGED_2", "RANGED_3", "LUNGE_1", "LUNGE_2", "LUNGE_3", "VERTICAL_1", "VERTICAL_2", "VERTICAL_3" ]
+  },
+  {
+    "x": 30,
+    "y": 41,
+    "locations": [ "RE02", "RE04", "RE10" ]
+  },
+  {
+    "x": 31,
+    "y": 41,
+    "locations": [ "QI66", "Tirso[500]", "Tirso[1000]", "Tirso[2000]", "Tirso[5000]", "Tirso[10000]", "QI56" ]
+  },
+  {
+    "x": 31,
+    "y": 42,
+    "locations": [ "RB01" ]
+  },
+  {
+    "x": 32,
+    "y": 40,
+    "locations": [ "CO43", "QI201", "Undertaker[250]", "Undertaker[500]", "Undertaker[750]", "Undertaker[1000]", "Undertaker[1250]", "Undertaker[1500]", "Undertaker[1750]", "Undertaker[2000]", "Undertaker[2500]", "Undertaker[3000]", "Undertaker[5000]" ]
+  },
+  {
+    "x": 32,
+    "y": 41,
+    "locations": [ "Lvdovico[500]", "Lvdovico[1000]", "PR03", "QI01" ]
+  },
+  {
+    "x": 32,
+    "y": 42,
+    "locations": [ "RESCUED_CHERUB_08" ]
+  },
+  {
+    "x": 33,
+    "y": 41,
+    "locations": [ "RB104", "RB105", "PR11" ]
+  },
+  {
+    "x": 34,
+    "y": 41,
+    "locations": [ "CO16" ]
+  },
+// Wasteland of the Buried Churches
+  {
+    "x": 37,
+    "y": 40,
+    "locations": [ "RB04" ]
+  },
+  {
+    "x": 40,
+    "y": 41,
+    "locations": [ "CO14" ]
+  },
+  {
+    "x": 42,
+    "y": 41,
+    "locations": [ "CO36" ]
+  },
+  {
+    "x": 43,
+    "y": 41,
+    "locations": [ "RESCUED_CHERUB_10" ]
+  },
+  {
+    "x": 44,
+    "y": 43,
+    "locations": [ "HE02", "RESCUED_CHERUB_38" ]
+  },
+  {
+    "x": 47,
+    "y": 41,
+    "locations": [ "RB20" ]
+  },
+  {
+    "x": 48,
+    "y": 39,
+    "locations": [ "QI06" ]
+  },
+// Mercy Dreams
+  {
+    "x": 48,
+    "y": 31,
+    "locations": [ "QI38" ]
+  },
+  {
+    "x": 48,
+    "y": 34,
+    "locations": [ "QI58", "RB05", "RB09" ]
+  },
+  {
+    "x": 48,
+    "y": 35,
+    "locations": [ "RB17" ]
+  },
+  {
+    "x": 50,
+    "y": 32,
+    "locations": [ "QI48" ]
+  },
+  {
+    "x": 50,
+    "y": 35,
+    "locations": [ "RESCUED_CHERUB_09" ]
+  },
+  {
+    "x": 50,
+    "y": 39,
+    "locations": [ "QI32" ]
+  },
+  {
+    "x": 51,
+    "y": 31,
+    "locations": [ "BS01" ]
+  },
+  {
+    "x": 51,
+    "y": 35,
+    "locations": [ "CO03" ]
+  },
+  {
+    "x": 51,
+    "y": 38,
+    "locations": [ "CO30" ]
+  },
+  {
+    "x": 53,
+    "y": 30,
+    "locations": [ "CO38" ]
+  },
+  {
+    "x": 53,
+    "y": 35,
+    "locations": [ "PR01" ]
+  },
+  {
+    "x": 55,
+    "y": 30,
+    "locations": [ "CO21" ]
+  },
+  {
+    "x": 56,
+    "y": 30,
+    "locations": [ "RESCUED_CHERUB_33", "RB26" ]
+  },
+// Desecrated Cistern
+  {
+    "x": 31,
+    "y": 30,
+    "locations": [ "Sword[D01Z05S24]", "COMBO_1", "COMBO_2", "COMBO_3", "CHARGED_1", "CHARGED_2", "CHARGED_3", "RANGED_1", "RANGED_2", "RANGED_3", "LUNGE_1", "LUNGE_2", "LUNGE_3", "VERTICAL_1", "VERTICAL_2", "VERTICAL_3" ]
+  },
+  {
+    "x": 32,
+    "y": 30,
+    "locations": [ "QI75" ]
+  },
+  {
+    "x": 33,
+    "y": 20,
+    "locations": [ "CO44" ]
+  },
+  {
+    "x": 33,
+    "y": 31,
+    "locations": [ "RESCUED_CHERUB_22" ]
+  },
+  {
+    "x": 34,
+    "y": 19,
+    "locations": [ "Lady[D01Z05S26]" ]
+  },
+  {
+    "x": 34,
+    "y": 30,
+    "locations": [ "RB03" ]
+  },
+  {
+    "x": 34,
+    "y": 37,
+    "locations": [ "RESCUED_CHERUB_15" ]
+  },
+  {
+    "x": 35,
+    "y": 33,
+    "locations": [ "RESCUED_CHERUB_12" ]
+  },
+  {
+    "x": 35,
+    "y": 36,
+    "locations": [ "Oil[D01Z05S07]" ]
+  },
+  {
+    "x": 36,
+    "y": 30,
+    "locations": [ "CO32" ]
+  },
+  {
+    "x": 37,
+    "y": 36,
+    "locations": [ "QI12" ]
+  },
+  {
+    "x": 38,
+    "y": 36,
+    "locations": [ "RESCUED_CHERUB_14" ]
+  },
+  {
+    "x": 40,
+    "y": 35,
+    "locations": [ "QI67" ]
+  },
+  {
+    "x": 40,
+    "y": 39,
+    "locations": [ "CO09" ]
+  },
+  {
+    "x": 42,
+    "y": 32,
+    "locations": [ "RESCUED_CHERUB_11" ]
+  },
+  {
+    "x": 43,
+    "y": 31,
+    "locations": [ "Lady[D01Z05S22]" ]
+  },
+  {
+    "x": 43,
+    "y": 38,
+    "locations": [ "PR16", "RESCUED_CHERUB_13" ]
+  },
+  {
+    "x": 44,
+    "y": 33,
+    "locations": [ "CO41" ]
+  },
+  {
+    "x": 46,
+    "y": 36,
+    "locations": [ "QI45" ]
+  },
+// Petrous
+  {
+    "x": 23,
+    "y": 40,
+    "locations": [ "QI101" ]
+  },
+// Where Olive Trees Wither
+  {
+    "x": 34,
+    "y": 47,
+    "locations": [ "QI07" ]
+  },
+  {
+    "x": 38,
+    "y": 43,
+    "locations": [ "PR04" ]
+  },
+  {
+    "x": 38,
+    "y": 45,
+    "locations": [ "QI68" ]
+  },
+  {
+    "x": 39,
+    "y": 44,
+    "locations": [ "RESCUED_CHERUB_27" ]
+  },
+  {
+    "x": 39,
+    "y": 45,
+    "locations": [ "QI20" ]
+  },
+  {
+    "x": 41,
+    "y": 47,
+    "locations": [ "RESCUED_CHERUB_23" ]
+  },
+  {
+    "x": 42,
+    "y": 44,
+    "locations": [ "CO19" ]
+  },
+  {
+    "x": 42,
+    "y": 45,
+    "locations": [ "QI59", "RB10" ]
+  },
+  {
+    "x": 43,
+    "y": 44,
+    "locations": [ "CO11" ]
+  },
+  {
+    "x": 43,
+    "y": 47,
+    "locations": [ "HE05" ]
+  },
+// Graveyard of the Peaks
+  {
+    "x": 31,
+    "y": 49,
+    "locations": [ "RB38", "QI33" ]
+  },
+  {
+    "x": 32,
+    "y": 48,
+    "locations": [ "RESCUED_CHERUB_26" ]
+  },
+  {
+    "x": 32,
+    "y": 50,
+    "locations": [ "QI53" ]
+  },
+  {
+    "x": 33,
+    "y": 49,
+    "locations": [ "QI11", "RB37", "RB02" ]
+  },
+  {
+    "x": 33,
+    "y": 50,
+    "locations": [ "Lady[D02Z02S12]" ]
+  },
+  {
+    "x": 33,
+    "y": 58,
+    "locations": [ "HE11" ]
+  },
+  {
+    "x": 34,
+    "y": 54,
+    "locations": [ "RESCUED_CHERUB_25" ]
+  },
+  {
+    "x": 34,
+    "y": 55,
+    "locations": [ "RB32" ]
+  },
+  {
+    "x": 34,
+    "y": 56,
+    "locations": [ "CO01" ]
+  },
+  {
+    "x": 35,
+    "y": 48,
+    "locations": [ "CO42" ]
+  },
+  {
+    "x": 35,
+    "y": 49,
+    "locations": [ "RESCUED_CHERUB_31" ]
+  },
+  {
+    "x": 35,
+    "y": 53,
+    "locations": [ "RESCUED_CHERUB_24" ]
+  },
+  {
+    "x": 35,
+    "y": 58,
+    "locations": [ "RB15" ]
+  },
+  {
+    "x": 36,
+    "y": 53,
+    "locations": [ "QI46" ]
+  },
+  {
+    "x": 36,
+    "y": 54,
+    "locations": [ "CO29" ]
+  },
+  {
+    "x": 36,
+    "y": 56,
+    "locations": [ "QI08" ]
+  },
+  {
+    "x": 36,
+    "y": 57,
+    "locations": [ "Oil[D02Z02S10]" ]
+  },
+  {
+    "x": 37,
+    "y": 56,
+    "locations": [ "RB106", "Amanecida[D02Z02S14]" ]
+  },
+// Convent of Our Lady of the Charred Visage
+  {
+    "x": 22,
+    "y": 63,
+    "locations": [ "RB107" ]
+  },
+  {
+    "x": 23,
+    "y": 59,
+    "locations": [ "RB24" ]
+  },
+  {
+    "x": 26,
+    "y": 58,
+    "locations": [ "HE03" ]
+  },
+  {
+    "x": 26,
+    "y": 62,
+    "locations": [ "RB18" ]
+  },
+  {
+    "x": 27,
+    "y": 60,
+    "locations": [ "CO15" ]
+  },
+  {
+    "x": 27,
+    "y": 62,
+    "locations": [ "RB08" ]
+  },
+  {
+    "x": 29,
+    "y": 63,
+    "locations": [ "BS03" ]
+  },
+  {
+    "x": 30,
+    "y": 62,
+    "locations": [ "CO05" ]
+  },
+  {
+    "x": 31,
+    "y": 63,
+    "locations": [ "QI40", "QI57" ]
+  },
+  {
+    "x": 31,
+    "y": 64,
+    "locations": [ "Lady[D02Z03S15]" ]
+  },
+  {
+    "x": 31,
+    "y": 65,
+    "locations": [ "QI61" ]
+  },
+  {
+    "x": 33,
+    "y": 63,
+    "locations": [ "Sword[D02Z03S13]", "COMBO_1", "COMBO_2", "COMBO_3", "CHARGED_1", "CHARGED_2", "CHARGED_3", "RANGED_1", "RANGED_2", "RANGED_3", "LUNGE_1", "LUNGE_2", "LUNGE_3", "VERTICAL_1", "VERTICAL_2", "VERTICAL_3" ]
+  },
+// Mountains of the Endless Dusk
+  {
+    "x": 15,
+    "y": 36,
+    "locations": [ "QI63" ]
+  },
+  {
+    "x": 18,
+    "y": 36,
+    "locations": [ "RESCUED_CHERUB_16" ]
+  },
+  {
+    "x": 19,
+    "y": 36,
+    "locations": [ "QI47", "Amanecida[D03Z01S03]" ]
+  },
+  {
+    "x": 21,
+    "y": 36,
+    "locations": [ "RB22" ]
+  },
+  {
+    "x": 23,
+    "y": 37,
+    "locations": [ "RB13", "QI14" ]
+  },
+  {
+    "x": 32,
+    "y": 37,
+    "locations": [ "CO13" ]
+  },
+// Jondo
+  {
+    "x": 14,
+    "y": 33,
+    "locations": [ "QI52" ]
+  },
+  {
+    "x": 15,
+    "y": 34,
+    "locations": [ "RB28" ]
+  },
+  {
+    "x": 16,
+    "y": 35,
+    "locations": [ "RESCUED_CHERUB_17" ]
+  },
+  {
+    "x": 17,
+    "y": 29,
+    "locations": [ "QI41" ]
+  },
+  {
+    "x": 18,
+    "y": 28,
+    "locations": [ "CO07" ]
+  },
+  {
+    "x": 21,
+    "y": 28,
+    "locations": [ "QI19" ]
+  },
+  {
+    "x": 21,
+    "y": 29,
+    "locations": [ "CO33" ]
+  },
+  {
+    "x": 21,
+    "y": 34,
+    "locations": [ "CO08" ]
+  },
+  {
+    "x": 21,
+    "y": 35,
+    "locations": [ "PR10" ]
+  },
+  {
+    "x": 22,
+    "y": 32,
+    "locations": [ "RESCUED_CHERUB_18" ]
+  },
+  {
+    "x": 25,
+    "y": 32,
+    "locations": [ "RESCUED_CHERUB_37" ]
+  },
+  {
+    "x": 26,
+    "y": 32,
+    "locations": [ "HE06" ]
+  },
+  {
+    "x": 27,
+    "y": 32,
+    "locations": [ "QI103" ]
+  },
+// Grievance Ascends
+  {
+    "x": 21,
+    "y": 22,
+    "locations": [ "QI44" ]
+  },
+  {
+    "x": 22,
+    "y": 16,
+    "locations": [ "QI13", "RB06" ]
+  },
+  {
+    "x": 22,
+    "y": 25,
+    "locations": [ "QI34" ]
+  },
+  {
+    "x": 24,
+    "y": 19,
+    "locations": [ "Oil[D03Z03S13]" ]
+  },
+  {
+    "x": 25,
+    "y": 17,
+    "locations": [ "RESCUED_CHERUB_20" ]
+  },
+  {
+    "x": 25,
+    "y": 23,
+    "locations": [ "CO12" ]
+  },
+  {
+    "x": 25,
+    "y": 26,
+    "locations": [ "RE07", "RESCUED_CHERUB_19" ]
+  },
+  {
+    "x": 29,
+    "y": 19,
+    "locations": [ "BS04" ]
+  },
+  {
+    "x": 29,
+    "y": 22,
+    "locations": [ "QI10", "RESCUED_CHERUB_21" ]
+  },
+  {
+    "x": 31,
+    "y": 19,
+    "locations": [ "QI39" ]
+  },
+// Patio of the Silent Steps
+  {
+    "x": 57,
+    "y": 42,
+    "locations": [ "RESCUED_CHERUB_35" ]
+  },
+  {
+    "x": 58,
+    "y": 43,
+    "locations": [ "CO23" ]
+  },
+  {
+    "x": 58,
+    "y": 47,
+    "locations": [ "QI102" ]
+  },
+  {
+    "x": 61,
+    "y": 42,
+    "locations": [ "RB14" ]
+  },
+  {
+    "x": 62,
+    "y": 42,
+    "locations": [ "QI37" ]
+  },
+  {
+    "x": 62,
+    "y": 43,
+    "locations": [ "CO39" ]
+  },
+  {
+    "x": 64,
+    "y": 43,
+    "locations": [ "RESCUED_CHERUB_28" ]
+  },
+  {
+    "x": 65,
+    "y": 42,
+    "locations": [ "RB21" ]
+  },
+  {
+    "x": 66,
+    "y": 42,
+    "locations": [ "Amanecida[D04Z01S04]" ]
+  },
+// Mother of Mothers
+  {
+    "x": 67,
+    "y": 43,
+    "locations": [ "RE402", "RESCUED_CHERUB_30" ]
+  },
+  {
+    "x": 67,
+    "y": 44,
+    "locations": [ "CO17" ]
+  },
+  {
+    "x": 68,
+    "y": 44,
+    "locations": [ "QI79" ]
+  },
+  {
+    "x": 68,
+    "y": 46,
+    "locations": [ "QI60" ]
+  },
+  {
+    "x": 70,
+    "y": 46,
+    "locations": [ "BS05" ]
+  },
+  {
+    "x": 73,
+    "y": 44,
+    "locations": [ "CO20" ]
+  },
+  {
+    "x": 73,
+    "y": 46,
+    "locations": [ "RESCUED_CHERUB_29" ]
+  },
+  {
+    "x": 73,
+    "y": 47,
+    "locations": [ "Sword[D04Z02S12]", "COMBO_1", "COMBO_2", "COMBO_3", "CHARGED_1", "CHARGED_2", "CHARGED_3", "RANGED_1", "RANGED_2", "RANGED_3", "LUNGE_1", "LUNGE_2", "LUNGE_3", "VERTICAL_1", "VERTICAL_2", "VERTICAL_3" ]
+  },
+  {
+    "x": 74,
+    "y": 41,
+    "locations": [ "Oil[D04Z02S14]" ]
+  },
+  {
+    "x": 75,
+    "y": 44,
+    "locations": [ "CO34" ]
+  },
+  {
+    "x": 80,
+    "y": 45,
+    "locations": [ "RB33" ]
+  },
+  {
+    "x": 80,
+    "y": 50,
+    "locations": [ "HE01" ]
+  },
+  {
+    "x": 81,
+    "y": 44,
+    "locations": [ "CO35" ]
+  },
+  {
+    "x": 83,
+    "y": 46,
+    "locations": [ "RE03", "QI54" ]
+  },
+// Knot of the Three Words
+  {
+    "x": 73,
+    "y": 41,
+    "locations": [ "HE201" ]
+  },
+// All the Tears of the Sea
+  {
+    "x": 85,
+    "y": 42,
+    "locations": [ "PR201" ]
+  },
+// Library of the Negated Words
+  {
+    "x": 59,
+    "y": 31,
+    "locations": [ "Oil[D05Z01S19]" ]
+  },
+  {
+    "x": 60,
+    "y": 32,
+    "locations": [ "RESCUED_CHERUB_02" ]
+  },
+  {
+    "x": 60,
+    "y": 33,
+    "locations": [ "RB30" ]
+  },
+  {
+    "x": 60,
+    "y": 35,
+    "locations": [ "RB203", "CO28" ]
+  },
+  {
+    "x": 60,
+    "y": 38,
+    "locations": [ "RB31" ]
+  },
+  {
+    "x": 62,
+    "y": 35,
+    "locations": [ "PR07" ]
+  },
+  {
+    "x": 64,
+    "y": 36,
+    "locations": [ "Lady[D05Z01S14]" ]
+  },
+  {
+    "x": 65,
+    "y": 34,
+    "locations": [ "PR15" ]
+  },
+  {
+    "x": 68,
+    "y": 37,
+    "locations": [ "QI50" ]
+  },
+  {
+    "x": 68,
+    "y": 41,
+    "locations": [ "CO22" ]
+  },
+  {
+    "x": 69,
+    "y": 39,
+    "locations": [ "CO18" ]
+  },
+  {
+    "x": 69,
+    "y": 41,
+    "locations": [ "QI80" ]
+  },
+  {
+    "x": 70,
+    "y": 40,
+    "locations": [ "RESCUED_CHERUB_01" ]
+  },
+  {
+    "x": 71,
+    "y": 39,
+    "locations": [ "Sword[D05Z01S13]", "COMBO_1", "COMBO_2", "COMBO_3", "CHARGED_1", "CHARGED_2", "CHARGED_3", "RANGED_1", "RANGED_2", "RANGED_3", "LUNGE_1", "LUNGE_2", "LUNGE_3", "VERTICAL_1", "VERTICAL_2", "VERTICAL_3" ]
+  },
+  {
+    "x": 71,
+    "y": 40,
+    "locations": [ "RB301" ]
+  },
+  {
+    "x": 72,
+    "y": 34,
+    "locations": [ "RESCUED_CHERUB_32" ]
+  },
+  {
+    "x": 73,
+    "y": 39,
+    "locations": [ "QI62" ]
+  },
+  {
+    "x": 74,
+    "y": 39,
+    "locations": [ "RB19" ]
+  },
+// The Sleeping Canvases
+  {
+    "x": 57,
+    "y": 31,
+    "locations": [ "QI104" ]
+  },
+  {
+    "x": 60,
+    "y": 30,
+    "locations": [ "RB12", "QI49", "QI71" ]
+  },
+  {
+    "x": 64,
+    "y": 30,
+    "locations": [ "QI64" ]
+  },
+  {
+    "x": 66,
+    "y": 30,
+    "locations": [ "HE07" ]
+  },
+  {
+    "x": 66,
+    "y": 32,
+    "locations": [ "RE05", "PR05" ]
+  },
+  {
+    "x": 71,
+    "y": 32,
+    "locations": [ "BS06" ]
+  },
+  {
+    "x": 72,
+    "y": 31,
+    "locations": [ "CO31" ]
+  },
+//  Archcathedral Rooftops
+  {
+    "x": 72,
+    "y": 51,
+    "locations": [ "CO06" ]
+  },
+  {
+    "x": 72,
+    "y": 52,
+    "locations": [ "RESCUED_CHERUB_36" ]
+  },
+  {
+    "x": 72,
+    "y": 55,
+    "locations": [ "PR12" ]
+  },
+  {
+    "x": 74,
+    "y": 48,
+    "locations": [ "HE04" ]
+  },
+  {
+    "x": 76,
+    "y": 49,
+    "locations": [ "QI02" ]
+  },
+  {
+    "x": 76,
+    "y": 52,
+    "locations": [ "QI03" ]
+  },
+  {
+    "x": 77,
+    "y": 59,
+    "locations": [ "BS16" ]
+  },
+  {
+    "x": 78,
+    "y": 51,
+    "locations": [ "Lady[D06Z01S24]" ]
+  },
+  {
+    "x": 78,
+    "y": 56,
+    "locations": [ "QI04" ]
+  },
+  {
+    "x": 79,
+    "y": 54,
+    "locations": [ "CO40" ]
+  },
+  {
+    "x": 80,
+    "y": 56,
+    "locations": [ "Sword[D06Z01S11]", "COMBO_1", "COMBO_2", "COMBO_3", "CHARGED_1", "CHARGED_2", "CHARGED_3", "RANGED_1", "RANGED_2", "RANGED_3", "LUNGE_1", "LUNGE_2", "LUNGE_3", "VERTICAL_1", "VERTICAL_2", "VERTICAL_3" ]
+  },
+// Deambulatory of his Holiness
+  {
+    "x": 80,
+    "y": 59,
+    "locations": [ "PR08" ]
+  },
+// Bridge of the Three Calvaries
+  {
+    "x": 52,
+    "y": 41,
+    "locations": [ "BS12", "PR09" ]
+  },
+  {
+    "x": 54,
+    "y": 44,
+    "locations": [ "HE101" ]
+  },
+// Hall of the Dawning
+  {
+    "x": 55,
+    "y": 47,
+    "locations": [ "LaudesBossTrigger[30000]" ]
+  },
+  {
+    "x": 56,
+    "y": 44,
+    "locations": [ "QI105" ]
+  },
+// Wall of the Holy Prohibitions
+  {
+    "x": 55,
+    "y": 51,
+    "locations": [ "QI81" ]
+  },
+  {
+    "x": 57,
+    "y": 50,
+    "locations": [ "BS14" ]
+  },
+  {
+    "x": 57,
+    "y": 51,
+    "locations": [ "QI72" ]
+  },
+  {
+    "x": 58,
+    "y": 49,
+    "locations": [ "Oil[D09Z01S12]" ]
+  },
+  {
+    "x": 58,
+    "y": 51,
+    "locations": [ "RESCUED_CHERUB_34" ]
+  },
+  {
+    "x": 59,
+    "y": 48,
+    "locations": [ "CO02" ]
+  },
+  {
+    "x": 59,
+    "y": 50,
+    "locations": [ "CO26" ]
+  },
+  {
+    "x": 60,
+    "y": 49,
+    "locations": [ "RB16" ]
+  },
+  {
+    "x": 60,
+    "y": 52,
+    "locations": [ "RESCUED_CHERUB_05" ]
+  },
+  {
+    "x": 62,
+    "y": 48,
+    "locations": [ "CO27", "RESCUED_CHERUB_04" ]
+  },
+  {
+    "x": 62,
+    "y": 49,
+    "locations": [ "QI70" ]
+  },
+  {
+    "x": 62,
+    "y": 50,
+    "locations": [ "QI51" ]
+  },
+  {
+    "x": 62,
+    "y": 51,
+    "locations": [ "RESCUED_CHERUB_03" ]
+  },
+  {
+    "x": 63,
+    "y": 50,
+    "locations": [ "CO10", "QI69" ]
+  },
+  {
+    "x": 63,
+    "y": 51,
+    "locations": [ "CO24" ]
+  },
+  {
+    "x": 64,
+    "y": 49,
+    "locations": [ "CO37" ]
+  },
+  {
+    "x": 64,
+    "y": 50,
+    "locations": [ "RB11" ]
+  },
+  {
+    "x": 66,
+    "y": 52,
+    "locations": [ "Amanecida[D09Z01S01]" ]
+  },
+// Brotherhood of the Silent Sorrow
+  {
+    "x": 3,
+    "y": 44,
+    "locations": [ "QI204", "QI301" ]
+  },
+  {
+    "x": 5,
+    "y": 43,
+    "locations": [ "RESCUED_CHERUB_06" ]
+  },
+  {
+    "x": 5,
+    "y": 44,
+    "locations": [ "PR203" ]
+  },
+  {
+    "x": 7,
+    "y": 43,
+    "locations": [ "RB204" ]
+  },
+  {
+    "x": 11,
+    "y": 37,
+    "locations": [ "Sword[D17Z01S08]", "COMBO_1", "COMBO_2", "COMBO_3", "CHARGED_1", "CHARGED_2", "CHARGED_3", "RANGED_1", "RANGED_2", "RANGED_3", "LUNGE_1", "LUNGE_2", "LUNGE_3", "VERTICAL_1", "VERTICAL_2", "VERTICAL_3" ]
+  },
+  {
+    "x": 11,
+    "y": 40,
+    "locations": [ "QI35" ]
+  },
+  {
+    "x": 12,
+    "y": 40,
+    "locations": [ "RE401", "CO25" ]
+  },
+  {
+    "x": 13,
+    "y": 40,
+    "locations": [ "RB25" ]
+  },
+  {
+    "x": 15,
+    "y": 41,
+    "locations": [ "BS13" ]
+  },
+  {
+    "x": 16,
+    "y": 41,
+    "locations": [ "RE01" ]
+  },
+// Echoes of Salt
+  {
+    "x": 30,
+    "y": 26,
+    "locations": [ "RB202" ]
+  },
+  {
+    "x": 31,
+    "y": 33,
+    "locations": [ "RB108" ]
+  },
+// Mourning and Havoc
+  {
+    "x": 43,
+    "y": 25,
+    "locations": [ "PR202" ]
+  },
+  {
+    "x": 61,
+    "y": 27,
+    "locations": [ "BossTrigger[5000]", "QI202" ]
+  },
+  {
+    "x": 81,
+    "y": 27,
+    "locations": [ "RB201" ]
+  },
+// The Resting Place of the Sister
+  {
+    "x": 41,
+    "y": 30,
+    "locations": [ "QI203" ]
+  }
+]
