@@ -344,7 +344,7 @@ public class MapTracker : BlasMod
         List<DoorLocation> previousUnreachableDoors;
         Stack<DoorLocation> currentDoors;
 
-        DoorLocation startingDoor = allDoorLocations[Main.Randomizer.StartingDoor.Door];
+        DoorLocation startingDoor = allDoorLocations[settings.RealStartingLocation.Door];
         roomObjects["Initial"].AddRange(roomObjects[startingDoor.Room]); // Starting room is visible
         roomObjects["D02Z02S11"].AddRange(roomObjects["D01Z02S03"]); // Albero elevator room is also visible after graveyard elevator
         foreach (string obj in roomObjects["Initial"])
