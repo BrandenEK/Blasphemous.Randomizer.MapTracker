@@ -344,17 +344,13 @@ public class MapTracker : BlasMod
         List<DoorLocation> previousUnreachableDoors;
         Stack<DoorLocation> currentDoors;
 
-        DoorLocation startingDoor = allDoorLocations[Main.Randomizer.StartingDoor.Door];
+        DoorLocation startingDoor = allDoorLocations[settings.RealStartingLocation.Door];
         roomObjects["Initial"].AddRange(roomObjects[startingDoor.Room]); // Starting room is visible
         roomObjects["D02Z02S11"].AddRange(roomObjects["D01Z02S03"]); // Albero elevator room is also visible after graveyard elevator
         foreach (string obj in roomObjects["Initial"])
         {
-            if (obj[0] == 'D')
-            {
-                DoorLocation door = allDoorLocations[obj];
-                if (door.Direction != 5)
-                    unreachableDoors.Add(door); // Maybe instead check visibility flags
-            }
+            if (allDoorLocations.TryGetValue(obj, out DoorLocation door) && door.Direction != 5)
+                unreachableDoors.Add(door); // Maybe instead check visibility flags
         }
         inventory.AddItem(startingDoor.Id);
         visibleRooms.Add(startingDoor.Room);
@@ -375,7 +371,8 @@ public class MapTracker : BlasMod
                 if (inventory.Evaluate(enterDoor.Logic))
                 {
                     DoorLocation exitDoor = Main.Randomizer.itemShuffler.GetTargetDoor(enterDoor.Id);
-                    if (exitDoor == null) exitDoor = allDoorLocations[enterDoor.OriginalDoor];
+                    if (exitDoor == null)
+                        exitDoor = allDoorLocations[enterDoor.OriginalDoor];
 
                     checkedDoors.Add(enterDoor);
                     checkedDoors.Add(exitDoor);
@@ -387,16 +384,11 @@ public class MapTracker : BlasMod
                     string newRoom = exitDoor.Room;
                     foreach (string obj in roomObjects[newRoom])
                     {
-                        if (obj[0] == 'D')
-                        {
-                            // If this door hasn't already been processed, make it visible
-                            DoorLocation newDoor = allDoorLocations[obj];
-                            if (newDoor.ShouldBeMadeVisible(settings, inventory))
-                            {
-                                currentDoors.Push(newDoor);
-                            }
-                        }
+                        // If this door hasn't already been processed, make it visible
+                        if (allDoorLocations.TryGetValue(obj, out DoorLocation newDoor) && newDoor.ShouldBeMadeVisible(settings, inventory))
+                            currentDoors.Push(newDoor);
                     }
+
                     if (!visibleRooms.Contains(newRoom))
                         visibleRooms.Add(newRoom);
                     if (newRoom == "D02Z02S11" && !visibleRooms.Contains("D01Z02S03"))
