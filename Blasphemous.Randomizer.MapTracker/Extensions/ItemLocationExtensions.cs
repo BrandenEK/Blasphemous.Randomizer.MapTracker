@@ -22,10 +22,10 @@ public static class ItemLocationExtensions
     /// </summary>
     public static bool ShouldBeTracked(this ItemLocation location, Config config)
     {
-        if (!config.ShuffleSwordSkills && location.Type == 1)
-            return false;
-        if (!config.ShuffleThorns && location.Type == 2)
-            return false;
+        //if (!config.ShuffleSwordSkills && location.Type == 1)
+        //    return false;
+        //if (!config.ShuffleThorns && location.Type == 2)
+        //    return false;
         if (!config.ShuffleBootsOfPleading && location.Id == "RE401")
             return false;
         if (!config.ShufflePurifiedHand && location.Id == "RE402")
