@@ -136,7 +136,7 @@ public class MapTracker : BlasMod
                 Vector2 cellPosition = new Vector2(mark.localPosition.x / 16, mark.localPosition.y / 16);
                 if (!mapLocations.TryGetValue(cellPosition, out IMapLocation mapLocation))
                 {
-                    LogError(cellPosition + " is not a cell that contains locations!");
+                    ModLog.Error(cellPosition + " is not a cell that contains locations!");
                     continue;
                 }
                 CollectionStatus collectionStatus = mapLocation.GetCurrentStatusTotal(config, currentInventory, currentVisibleRooms);
@@ -223,7 +223,7 @@ public class MapTracker : BlasMod
 
     private void CreateMarksHolder()
     {
-        Log("Creating marks holder");
+        ModLog.Info("Creating marks holder");
         Transform rootRenderer = MapWidget?.transform.Find("Background/Map/MapMask/MapRoot/RootRenderer_0");
         if (rootRenderer == null) return;
 
@@ -246,7 +246,7 @@ public class MapTracker : BlasMod
     private void CreateLocationText()
     {
         //LogWarning(MapWidget.transform.Find("Background/LowerZone").DisplayHierarchy(10, false));
-        Log("Creating location text");
+        ModLog.Info("Creating location text");
         Transform iconHolder = MapWidget?.transform.Find("Background/LowerZone/MarkSelector/IconList");
         if (iconHolder == null) return;
 
@@ -270,7 +270,7 @@ public class MapTracker : BlasMod
 
     private BlasphemousInventory CreateCurrentInventory(Config settings, out List<string> visibleRooms)
     {
-        Log("Calculating current inventory");
+        ModLog.Info("Calculating current inventory");
         BlasphemousInventory inventory = new BlasphemousInventory();
         inventory.SetConfigSettings(settings);
 

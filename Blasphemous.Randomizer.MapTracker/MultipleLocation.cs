@@ -1,4 +1,5 @@
-﻿using Blasphemous.Randomizer.ItemRando;
+﻿using Blasphemous.ModdingAPI;
+using Blasphemous.Randomizer.ItemRando;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
@@ -17,7 +18,7 @@ internal class MultipleLocation : IMapLocation
     {
         if (idx < 0 && idx >= locations.Length)
         {
-            Main.MapTracker.LogError("Location idx out of bounds for " + locations[0]);
+            ModLog.Error("Location idx out of bounds for " + locations[0]);
             return CollectionStatus.AllUnreachable;
         }
 
@@ -111,7 +112,7 @@ internal class MultipleLocation : IMapLocation
     {
         if (idx < 0 && idx >= locations.Length)
         {
-            Main.MapTracker.LogError("Location idx out of bounds for " + locations[0]);
+            ModLog.Error("Location idx out of bounds for " + locations[0]);
             return "???";
         }
 

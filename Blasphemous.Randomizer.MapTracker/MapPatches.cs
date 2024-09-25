@@ -8,7 +8,7 @@ using System.Collections.Generic;
 namespace Blasphemous.Randomizer.MapTracker;
 
 // Change speed of map scrolling
-[HarmonyPatch(typeof(NewMapMenuWidget), "Initialize")]
+[HarmonyPatch(typeof(NewMapMenuWidget), nameof(NewMapMenuWidget.Initialize))]
 class MapMenuWidgetSpeed_Patch
 {
     public static void Postfix(List<MapRenderer> ___MapRenderers)
@@ -21,7 +21,7 @@ class MapMenuWidgetSpeed_Patch
 }
 
 // Refresh map when pausing or toggling marks
-[HarmonyPatch(typeof(NewMapMenuWidget), "OnShow")]
+[HarmonyPatch(typeof(NewMapMenuWidget), nameof(NewMapMenuWidget.OnShow))]
 class MapMenuWidgetShow_Patch
 {
     public static void Postfix()
@@ -36,7 +36,7 @@ class MapMenuWidgetShow_Patch
 }
 
 // Reveal the entire map when display locations is turned on
-[HarmonyPatch(typeof(NewMapManager), "GetAllRevealedCells", typeof(MapData))]
+[HarmonyPatch(typeof(NewMapManager), nameof(NewMapManager.GetAllRevealedCells), typeof(MapData))]
 class MapGetRevealed_Patch
 {
     public static bool Prefix(MapData map, ref List<CellData> __result)
@@ -66,7 +66,7 @@ class MapGetRevealed_Patch
         return false;
     }
 }
-[HarmonyPatch(typeof(NewMapManager), "GetAllRevealSecretsCells")]
+[HarmonyPatch(typeof(NewMapManager), nameof(NewMapManager.GetAllRevealSecretsCells))]
 class MapGetSecrets_Patch
 {
     public static bool Prefix(MapData ___CurrentMap, ref List<CellKey> __result)
@@ -88,7 +88,7 @@ class MapGetSecrets_Patch
 }
 
 // Prevent centering view when refreshing map
-[HarmonyPatch(typeof(NewMapMenuWidget), "CenterView")]
+[HarmonyPatch(typeof(NewMapMenuWidget), nameof(NewMapMenuWidget.CenterView))]
 class MapMenuWidgetCenter_Patch
 {
     public static bool Prefix()
@@ -98,14 +98,14 @@ class MapMenuWidgetCenter_Patch
 }
 
 // Prevent placing marks
-[HarmonyPatch(typeof(NewMapMenuWidget), "MarkPressed")]
+[HarmonyPatch(typeof(NewMapMenuWidget), nameof(NewMapMenuWidget.MarkPressed))]
 class MapMenuWidgetMark_Patch
 {
     public static bool Prefix() => false;
 }
 
 // Change selected map cell when moving map
-[HarmonyPatch(typeof(NewMapMenuWidget), "UpdateCellData")]
+[HarmonyPatch(typeof(NewMapMenuWidget), nameof(NewMapMenuWidget.UpdateCellData))]
 class MapMenuWidgetUpdateCell_Patch
 {
     public static void Postfix(CellData ___CurrentCell)
@@ -115,7 +115,7 @@ class MapMenuWidgetUpdateCell_Patch
 }
 
 // Process tab input
-[HarmonyPatch(typeof(NewMapMenuWidget), "UITabLeft")]
+[HarmonyPatch(typeof(NewMapMenuWidget), nameof(NewMapMenuWidget.UITabLeft))]
 class MapMenuWidgetTabLeft_Patch
 {
     public static void Postfix()
@@ -123,7 +123,7 @@ class MapMenuWidgetTabLeft_Patch
         Main.MapTracker.TabLocationIndex(-1);
     }
 }
-[HarmonyPatch(typeof(NewMapMenuWidget), "UITabRight")]
+[HarmonyPatch(typeof(NewMapMenuWidget), nameof(NewMapMenuWidget.UITabRight))]
 class MapMenuWidgetTabRight_Patch
 {
     public static void Postfix()
@@ -133,7 +133,7 @@ class MapMenuWidgetTabRight_Patch
 }
 
 // Recalculate inventory when item is added
-[HarmonyPatch(typeof(Item), "addToInventory")]
+[HarmonyPatch(typeof(Item), nameof(Item.addToInventory))]
 class ItemAdd_Patch
 {
     public static void Postfix()

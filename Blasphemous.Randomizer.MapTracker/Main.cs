@@ -1,5 +1,5 @@
 ﻿using BepInEx;
-using Blasphemous.ModdingAPI;
+using Blasphemous.ModdingAPI.Helpers;
 
 namespace Blasphemous.Randomizer.MapTracker;
 
@@ -14,7 +14,6 @@ internal class Main : BaseUnityPlugin
     private void Start()
     {
         MapTracker = new MapTracker();
-        Randomizer = MapTracker.IsModLoadedName("Randomizer", out BlasMod mod) ? mod as Randomizer
-            : throw new System.Exception("Randomizer not loaded");
+        Randomizer = (Randomizer)ModHelper.GetModByName("Randomizer");
     }
 }

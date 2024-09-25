@@ -54,5 +54,4 @@ internal static class MapExtensions
         // Return output
         return currentHierarchy;
     }
-
 }
