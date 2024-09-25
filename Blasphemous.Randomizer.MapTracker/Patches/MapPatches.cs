@@ -5,7 +5,7 @@ using Gameplay.UI.Others.MenuLogic;
 using HarmonyLib;
 using System.Collections.Generic;
 
-namespace Blasphemous.Randomizer.MapTracker;
+namespace Blasphemous.Randomizer.MapTracker.Patches;
 
 // Change speed of map scrolling
 [HarmonyPatch(typeof(NewMapMenuWidget), nameof(NewMapMenuWidget.Initialize))]

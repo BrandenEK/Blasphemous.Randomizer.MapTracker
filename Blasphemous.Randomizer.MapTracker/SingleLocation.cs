@@ -1,4 +1,5 @@
 ﻿using Blasphemous.Randomizer.ItemRando;
+using Blasphemous.Randomizer.MapTracker.Extensions;
 using System.Collections.Generic;
 using UnityEngine.UI;
 

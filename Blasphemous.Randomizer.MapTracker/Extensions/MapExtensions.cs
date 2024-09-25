@@ -2,7 +2,7 @@
 using System.Text;
 using UnityEngine;
 
-namespace Blasphemous.Randomizer.MapTracker;
+namespace Blasphemous.Randomizer.MapTracker.Extensions;
 
 internal static class MapExtensions
 {

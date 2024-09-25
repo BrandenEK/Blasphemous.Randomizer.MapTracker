@@ -2,7 +2,7 @@
 using Framework.Managers;
 using System.Collections.Generic;
 
-namespace Blasphemous.Randomizer.MapTracker
+namespace Blasphemous.Randomizer.MapTracker.Extensions
 {
     /// <summary>
     /// Add functionality for Randomizer item locations
@@ -62,7 +62,7 @@ namespace Blasphemous.Randomizer.MapTracker
                 case "QI79": return "guiltBead";
                 case "QI80": return "guiltBead";
                 case "QI81": return "guiltBead";
-                default:     return location.Logic;
+                default: return location.Logic;
             }
         }
 
@@ -89,7 +89,7 @@ namespace Blasphemous.Randomizer.MapTracker
                 case "QI79": return "D04Z02S17";
                 case "QI80": return "D05Z01S17";
                 case "QI81": return "D09Z01S13";
-                default:     return location.Room;
+                default: return location.Room;
             }
         }
 

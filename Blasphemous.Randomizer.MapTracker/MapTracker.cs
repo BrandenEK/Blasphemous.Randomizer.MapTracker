@@ -1,6 +1,7 @@
 ﻿using Blasphemous.ModdingAPI;
 using Blasphemous.Randomizer.DoorRando;
 using Blasphemous.Randomizer.ItemRando;
+using Blasphemous.Randomizer.MapTracker.Extensions;
 using Framework.Managers;
 using Framework.Map;
 using Gameplay.UI.Others.MenuLogic;
