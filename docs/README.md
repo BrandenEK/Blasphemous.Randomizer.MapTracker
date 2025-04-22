@@ -21,5 +21,7 @@
 | Purple | No locations in this cell are reachable, but one of them is hinted |
 
 ## Installation
-This mod is available for download through the [Blasphemous Mod Installer](https://github.com/BrandenEK/Blasphemous.Modding.Installer)
-- Required dependencies: Modding API, Randomizer
+This mod is available for download through the [Blasphemous Mod Installer](https://github.com/BrandenEK/Blasphemous.Modding.Installer) <br>
+Required dependencies:
+- [Modding API](https://github.com/BrandenEK/Blasphemous.ModdingAPI)
+- [Randomizer](https://github.com/BrandenEK/Blasphemous.Randomizer)
