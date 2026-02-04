@@ -21,8 +21,8 @@
 
   <ItemGroup>
     <PackageReference Include="Blasphemous.GameLibs" Version="4.0.67" />
-    <PackageReference Include="Blasphemous.ModdingAPI" Version="2.4.1" />
-    <PackageReference Include="Blasphemous.Randomizer" Version="3.0.3" />
+    <PackageReference Include="Blasphemous.ModdingAPI" Version="3.0.0" />
+    <PackageReference Include="Blasphemous.Randomizer" Version="3.2.0" />
     <PackageReference Include="Basalt.LogicParser" Version="1.2.0" />
   </ItemGroup>
 
