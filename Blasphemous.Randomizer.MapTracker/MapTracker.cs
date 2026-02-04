@@ -439,20 +439,15 @@ public class MapTracker : BlasMod
     private PauseWidget _pauseWidget;
     private PauseWidget PauseWidget => _pauseWidget ??= _pauseWidget = Object.FindObjectOfType<PauseWidget>();
 
-    private static Color RGBColor(int r, int g, int b)
-    {
-        return new Color(r / 255f, g / 255f, b / 255f);
-    }
-
     private readonly Dictionary<CollectionStatus, Color> colorCodes = new()
     {
-        { CollectionStatus.Untracked, RGBColor(0, 0, 0) },
-        { CollectionStatus.Finished, RGBColor(63, 63, 63) },
-        { CollectionStatus.AllUnreachable, RGBColor(207, 16, 16) },
-        { CollectionStatus.SomeReachable, RGBColor(255, 159, 32) },
-        { CollectionStatus.AllReachable, RGBColor(32, 255, 32) },
-        { CollectionStatus.HintedAllUnreachable, RGBColor(192, 16, 255) },
-        { CollectionStatus.HintedSomeReachable, RGBColor(32, 255, 255) },
-        { CollectionStatus.HintedReachable, RGBColor(48, 64, 255) },
+        { CollectionStatus.Untracked, new Color32(0, 0, 0, 255) },
+        { CollectionStatus.Finished, new Color32(63, 63, 63, 255) },
+        { CollectionStatus.AllUnreachable, new Color32(207, 16, 16, 255) },
+        { CollectionStatus.SomeReachable, new Color32(255, 159, 32, 255) },
+        { CollectionStatus.AllReachable, new Color32(32, 255, 32, 255) },
+        { CollectionStatus.HintedAllUnreachable, new Color32(192, 16, 255, 255) },
+        { CollectionStatus.HintedSomeReachable, new Color32(32, 255, 255, 255) },
+        { CollectionStatus.HintedReachable, new Color32(48, 64, 255, 255) },
     };
 }
