@@ -7,9 +7,11 @@ using System.Collections.Generic;
 
 namespace Blasphemous.Randomizer.MapTracker.Patches;
 
-// Change speed of map scrolling
+/// <summary>
+/// Change speed of map scrolling
+/// </summary>
 [HarmonyPatch(typeof(NewMapMenuWidget), nameof(NewMapMenuWidget.Initialize))]
-class MapMenuWidgetSpeed_Patch
+class NewMapMenuWidget_Initialize_Patch
 {
     public static void Postfix(List<MapRenderer> ___MapRenderers)
     {
@@ -20,9 +22,11 @@ class MapMenuWidgetSpeed_Patch
     }
 }
 
-// Refresh map when pausing or toggling marks
+/// <summary>
+/// Refresh map when pausing or toggling marks
+/// </summary>
 [HarmonyPatch(typeof(NewMapMenuWidget), nameof(NewMapMenuWidget.OnShow))]
-class MapMenuWidgetShow_Patch
+class NewMapMenuWidget_OnShow_Patch
 {
     public static void Postfix()
     {
@@ -35,9 +39,11 @@ class MapMenuWidgetShow_Patch
     }
 }
 
-// Reveal the entire map when display locations is turned on
+/// <summary>
+/// Reveal the entire map when display locations is turned on
+/// </summary>
 [HarmonyPatch(typeof(NewMapManager), nameof(NewMapManager.GetAllRevealedCells), typeof(MapData))]
-class MapGetRevealed_Patch
+class NewMapManager_GetAllRevealedCells_Patch
 {
     public static bool Prefix(MapData map, ref List<CellData> __result)
     {
@@ -67,7 +73,7 @@ class MapGetRevealed_Patch
     }
 }
 [HarmonyPatch(typeof(NewMapManager), nameof(NewMapManager.GetAllRevealSecretsCells))]
-class MapGetSecrets_Patch
+class NewMapManager_GetAllRevealSecretsCells_Patch
 {
     public static bool Prefix(MapData ___CurrentMap, ref List<CellKey> __result)
     {
@@ -87,9 +93,11 @@ class MapGetSecrets_Patch
     }
 }
 
-// Prevent centering view when refreshing map
+/// <summary>
+/// Prevent centering view when refreshing map
+/// </summary>
 [HarmonyPatch(typeof(NewMapMenuWidget), nameof(NewMapMenuWidget.CenterView))]
-class MapMenuWidgetCenter_Patch
+class NewMapMenuWidget_CenterView_Patch
 {
     public static bool Prefix()
     {
@@ -97,16 +105,20 @@ class MapMenuWidgetCenter_Patch
     }
 }
 
-// Prevent placing marks
+/// <summary>
+/// Prevent placing marks
+/// </summary>
 [HarmonyPatch(typeof(NewMapMenuWidget), nameof(NewMapMenuWidget.MarkPressed))]
-class MapMenuWidgetMark_Patch
+class NewMapMenuWidget_MarkPressed_Patch
 {
     public static bool Prefix() => false;
 }
 
-// Change selected map cell when moving map
+/// <summary>
+/// Change selected map cell when moving map
+/// </summary>
 [HarmonyPatch(typeof(NewMapMenuWidget), nameof(NewMapMenuWidget.UpdateCellData))]
-class MapMenuWidgetUpdateCell_Patch
+class NewMapMenuWidget_UpdateCellData_Patch
 {
     public static void Postfix(CellData ___CurrentCell)
     {
@@ -114,9 +126,11 @@ class MapMenuWidgetUpdateCell_Patch
     }
 }
 
-// Process tab input
+/// <summary>
+/// Process tab input
+/// </summary>
 [HarmonyPatch(typeof(NewMapMenuWidget), nameof(NewMapMenuWidget.UITabLeft))]
-class MapMenuWidgetTabLeft_Patch
+class NewMapMenuWidget_UITabLeft_Patch
 {
     public static void Postfix()
     {
@@ -124,7 +138,7 @@ class MapMenuWidgetTabLeft_Patch
     }
 }
 [HarmonyPatch(typeof(NewMapMenuWidget), nameof(NewMapMenuWidget.UITabRight))]
-class MapMenuWidgetTabRight_Patch
+class NewMapMenuWidget_UITabRight_Patch
 {
     public static void Postfix()
     {
@@ -132,9 +146,11 @@ class MapMenuWidgetTabRight_Patch
     }
 }
 
-// Recalculate inventory when item is added
+/// <summary>
+/// Recalculate inventory when item is added
+/// </summary>
 [HarmonyPatch(typeof(Item), nameof(Item.addToInventory))]
-class ItemAdd_Patch
+class Item_addToInventory_Patch
 {
     public static void Postfix()
     {
